@@ -282,7 +282,7 @@ include_once ('includes/db1.php');
             <div class="card-body">
               <div class="table-responsive">
                  <table class="table table-bordered table-stripped" id="farm_orders" width="100%" cellspacing="0">
-                  <thead class="bg-primary">
+                  <thead class="bg-success">
                     <tr class="text-bold text-white">
                       <th><span class="fa fa-user"></span>&nbsp;Farmer</th>
                       <th>Item</th>
