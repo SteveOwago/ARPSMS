@@ -17,7 +17,7 @@
 
   if (isset($_GET['pf'])) {
     $pf = $_GET['pf'];
-    $query=mysqli_query($conn,"SELECT * FROM register_db R,farms F WHERE email='$pf'");
+    $query=mysqli_query($conn,"SELECT * FROM register_db R,farms F,scheme S WHERE F.scheme_id = S.scheme_id AND  email='$pf'");
     $data=mysqli_fetch_array($query);
     $email=$data['email'];
     $username=$data['username'];
@@ -29,6 +29,7 @@
     $phone=$data['phone'];
     $address=$data['address'];
     $fnumber=$data['fnumber'];
+    $scheme_name=$data['scheme_name'];
 
 
   }else{
@@ -45,6 +46,7 @@ if (isset($_GET['order'])) {
     $first_name=$data['first_name'];
     $last_name=$data['last_name'];
      $farm_id=$data['farm_id'];
+      $user_id=$data['user_id'];
     $farm_name=$data['farm_name'];
     $farm_size=$data['farm_size'];
     $phone=$data['phone'];
@@ -67,7 +69,7 @@ if (isset($_GET['order'])) {
       $scheme_name=$data['scheme_name'];
       $sup_id=$data['sup_id'];
       $sup_start_date=$data['sup_start_date'];
-      
+
 
 
     }else{
