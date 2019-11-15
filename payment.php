@@ -1,4 +1,5 @@
 <?php
+require ('includes/ses3.php');
 include ('includes/header.php');
 include ('nav_bar/navbar.php');
 require 'includes/db1.php';
@@ -18,7 +19,7 @@ $address = $row['address'];
 }
 ?>
 
-?>
+
 
    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
