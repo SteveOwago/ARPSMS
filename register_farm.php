@@ -91,6 +91,7 @@ require 'includes/display.php';
 
              <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Number"" name="fno"><br>
             <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Size" name="fsize"><br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Size" name="user_id" style="visibility:hidden;height:0px;"><br>
 
                 </div>
               </div>
