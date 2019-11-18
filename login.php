@@ -17,7 +17,7 @@
     body {
     font-family: 'Varela Round', sans-serif;
   }
-  .modal-login {    
+  .modal-login {
     color: #636363;
     width: 350px;
   }
@@ -27,7 +27,7 @@
     border: none;
   }
   .modal-login .modal-header {
-    border-bottom: none;   
+    border-bottom: none;
         position: relative;
         justify-content: center;
   }
@@ -41,13 +41,13 @@
   }
   .modal-login .form-control, .modal-login .btn {
     min-height: 40px;
-    border-radius: 3px; 
+    border-radius: 3px;
   }
   .modal-login .close {
         position: absolute;
     top: -5px;
     right: -5px;
-  } 
+  }
   .modal-login .modal-footer {
     background: #ecf0f1;
     border-color: #dee4e7;
@@ -59,7 +59,7 @@
   }
   .modal-login .modal-footer a {
     color: #999;
-  }   
+  }
   .modal-login .avatar {
     position: absolute;
     margin: 0 auto;
@@ -113,28 +113,41 @@
       <div class="modal-header">
         <div class="avatar">
           <img src="includes/avatar.png" alt="Avatar">
-        </div>        
-        <h4 class="modal-title">Member Login</h4> 
+        </div>
+        <h4 class="modal-title">Member Login</h4>
+         <?php
+              if(isset($_GET['error']))
+              {
+              if ($_GET['error'] == "Empty&mail") {
+              echo '<div class="alert alert-danger" role="alert">All fields are required!</div>';
+              }
+
+              elseif ($_GET['error'] == "wrongpassword") {
+              echo '<div class="alert alert-danger" role="alert">Passwords Provided Do Not Match!</div>';
+              }
+
+              }
+              ?>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
         <form action="includes/func.php" method="POST">
           <div class="form-group">
-            <input type="text" class="form-control" name="email" placeholder="Email Address" required="required">   
+            <input type="text" class="form-control" name="email" placeholder="Email Address">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required"> 
-          </div>        
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
           <div class="form-group">
             <button type="submit" name="login" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <a href="#">Forgot Password?</a>
+       <a href="register.php">No account yet?</a> <a href="password_recovery.php">Forgot Password?</a>
       </div>
     </div>
   </div>
-</div>     
+</div>
 </body>
 </html>                            
