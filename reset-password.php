@@ -127,8 +127,8 @@
                elseif ($_GET['error'] == "Unsuccessful") {
               echo '<div class="alert alert-danger" role="alert">Unsuccessful.Please Try Again!</div>';
               }
-               elseif ($_GET['error'] == "Successful") {
-              echo '<div class="alert alert-success" role="alert">Successful.Login To Your Email For Verification!</div>';
+               elseif ($_GET['error'] == "notsent") {
+              echo '<div class="alert alert-danger" role="alert">Unsuccessful.Try Again!</div>';
               }
 
               }
