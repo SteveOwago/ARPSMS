@@ -117,6 +117,8 @@
               }
               elseif ($_GET['error'] == "Exists") {
               echo '<div class="alert alert-danger" role="alert">User Already Exists!</div>';
+              }elseif ($_GET['error'] == "notsent") {
+              echo '<div class="alert alert-danger" role="alert">Unsuccessful.Try Again!</div>';
               }
               elseif ($_GET['error'] == "Password") {
               echo '<div class="alert alert-danger" role="alert">Passwords Provided Do Not Match!</div>';
