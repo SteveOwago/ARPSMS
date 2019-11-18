@@ -106,7 +106,7 @@
 <body><br><br><br><br><br><br><br><br>
 <div class="signup-form">
     <form action="includes/func.php" method="POST" enctype="multipart/form-data">
-    <h2>Reset</h2>
+    <h2>Recovery</h2>
     <p class="hint-text">Provide the email you used to register your account.</p>
 
     <?php
@@ -141,7 +141,7 @@
         </div>
 
     <div class="form-group">
-            <button type="submit" name="submit_reset" class="btn btn-sm btn-success pull-left">Submit</button>
+            <button type="submit" name="submit_forgot" class="btn btn-sm btn-success pull-left">Submit</button>
             <a href="login.php" class="btn btn-warning btn-sm pull-right" style="text-decoration: none; color: #ffffff;">Login</a>
         </div>
     </form>

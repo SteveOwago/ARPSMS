@@ -18,6 +18,19 @@ $address = $row['address'];
 <?php
 }
 ?>
+ <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    var commentsCount= 2;
+    $("button").click(function(){
+      commentsCount = commentsCount +2;
+      $("#comments").load("load-comments.php",{
+        commentNewCount: commentsCount
+      });
+    })
+  });
+
+  </script>
 
 
 
@@ -142,42 +155,58 @@ $address = $row['address'];
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">Upcoming Activities</h1>
             <a href="report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
 
 
            <div class="row">
-             <div class="col-xl-3">
+             <div class="col-xl-2">
              </div>
 
             <!-- Area Chart -->
-            <div class="col-xl-5">
+            <div class="col-xl-8">
               <div class="card shadow mb-4">
 
                 <!-- Card Body -->
                 <div class="card-body">
 
                     <div class="row" >
-                    <form>
+                    <div id="comments">
+                    <?php
+                    $sql = "SELECT * FROM activities LIMIT 2";
+                    $result = mysqli_query($conn,$sql);
 
-                      <label>Payment Type</label>
-                      <select>
-                        <option>MPESA</option>
-                        <option><?php if($status == 0) echo 'disabled';?>Cash on Delivery</option>
-                      </select><br><br>
-                      <label><i class="fa fa-home">  </i> Address</label>
-                      <input type="" name="" value="<?php echo $address;?>" class="form-control col-lg-12 col-lg-offset-8" ><br>
-                      <label><i class="fa fa-phone">  </i>  Phone Number</label>
-                      <input type="" name="" value="<?php echo $phone;?>" class="form-control col-lg-12 col-lg-offset-8" ><br>
-                      <label><i class="fa fa-credit-card">  </i> Card Number</label>
-                      <input type="" name="" placeholder="Enter Transaction Code" class="form-control col-lg-12 col-lg-offset-8" ><br>
-                      <div class="col-lg-8">
-                      <button class="btn btn-sm btn-success">Submit</button>
+                    if (mysqli_num_rows($result) > 0) {
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<p>";
+                        echo '<i>'.$row['author'].'</i>';
+                         echo "<br>";
+                         echo $row['adate'];
+                         echo "<br>";
+                          echo $row['atime'];
+                         echo "<br>";
+                          echo $row['venue'];
+                         echo "<br>";
+                          echo $row['activity'];
+                          echo "<br>";
 
-                      </div>
-                    </form>
+                        echo "</p>";
+                      }
+                    }
+                    else
+                    {
+                      echo "There are no comments";
+                    }
+
+                    ?>
+
+
+                    </div>
+                    </div>
+                     <button class="btn-info btn-sm">Show More Activities</button>
+
 
                     </div>
 

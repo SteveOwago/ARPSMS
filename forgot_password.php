@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-<title>Reset Password | ARPSMS</title>
+<title>Change Password | ARPSMS</title>
 
   <!-- Custom fonts for this template-->
   <link rel="shortcut icon" href="http://localhost/ARPSMS/includes/image/logo.ico". " type="image/x-icon">
@@ -105,9 +105,9 @@
 </head>
 <body><br><br><br><br><br><br><br><br>
 <div class="signup-form">
-    <form action="includes/func.php" method="POST" enctype="multipart/form-data">
+    <form action="includes/forg.php" method="POST" enctype="multipart/form-data">
     <h2>Reset</h2>
-    <p class="hint-text">Provide the email you used to register your account.</p>
+    <p class="hint-text">Please type in your new password.</p>
 
     <?php
               if(isset($_GET['error']))
@@ -121,28 +121,33 @@
               elseif ($_GET['error'] == "Password") {
               echo '<div class="alert alert-danger" role="alert">Passwords Provided Do Not Match!</div>';
               }
-              elseif ($_GET['error'] == "sent") {
-              echo '<div class="alert alert-success" role="alert">Successful.Check Your Email Address!</div>';
+              elseif ($_GET['error'] == "emailError") {
+              echo '<div class="alert alert-danger" role="alert">Invalid Email Address!</div>';
               }
                elseif ($_GET['error'] == "Unsuccessful") {
               echo '<div class="alert alert-danger" role="alert">Unsuccessful.Please Try Again!</div>';
               }
                elseif ($_GET['error'] == "Successful") {
               echo '<div class="alert alert-success" role="alert">Successful.Login To Your Email For Verification!</div>';
+              }elseif ($_GET['error'] == "sent") {
+              echo '<div class="alert alert-success" role="alert">Message Successfully Sent!</div>';
               }
+
 
               }
               ?>
         <div class="form-group">
       <div class="row">
-
-        <div class="form-group">
-          <input type="email" class="form-control" name="email" placeholder="Email">
+         <div class="form-group">
+          <input type="password" class="form-control" name="newpassword" placeholder="Enter New Password">
+        </div>
+         <div class="form-group">
+          <input type="password" class="form-control" name="confirmpassword" placeholder="Re-type New Password">
         </div>
 
     <div class="form-group">
-            <button type="submit" name="submit_reset" class="btn btn-sm btn-success pull-left">Submit</button>
-            <a href="login.php" class="btn btn-warning btn-sm pull-right" style="text-decoration: none; color: #ffffff;">Login</a>
+            <button type="submit" name="submit_forgot" class="btn btn-sm btn-success btn-block">Reset Password</button>
+
         </div>
     </form>
 
