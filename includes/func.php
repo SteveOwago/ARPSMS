@@ -2,7 +2,7 @@
 
 
 // Including database connection
-include_once ('db1.php');<?php
+
 
 
 // Including database connection
@@ -84,8 +84,8 @@ if (isset($_POST['submit'])) {
 			if ($result == TRUE)
 			{
 
-			require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-			require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+			require '/PHPMailer/class.phpmailer.php';
+			require '/PHPMailer/class.smtp.php';
 			$mail = new PHPMailer;
 			$mail->setFrom('admin@example.com');
 			$mail->addAddress($email);
@@ -115,8 +115,9 @@ if (isset($_POST['submit'])) {
 			}
 			else
 			{
-				header("Location:../register.php?error=Unseccessful");
-				exit();
+				// header("Location:../register.php?error=Unseccessful");
+				// exit();
+				echo "string".$conn->error;
 			}
 		}
 		}
