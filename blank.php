@@ -55,18 +55,18 @@ require 'includes/db.php';
             </li>
 
             <!-- Nav Item - Alerts -->
-            
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-       
 
-          
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?php
-            
+
             if (isset($_SESSION['email'])) {
             $sql = "SELECT * FROM register_db WHERE email='".$_SESSION['email']."'";
             $result = mysqli_query($conn,$sql);
@@ -80,7 +80,7 @@ require 'includes/db.php';
           }
 
             ?>
-               
+
              <?php
 
 
@@ -134,7 +134,7 @@ require 'includes/db.php';
           <h1 class="h3 mb-2 text-gray-800">Orders</h1>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-           
+
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -159,7 +159,7 @@ require 'includes/db.php';
                     </tr>
                   </tfoot>
                   <tbody>
-                   <?php  
+                   <?php
                   include_once ('includes/fetch.php');
                    while($data = mysqli_fetch_array($result)) {  ?>
                     <tr>
@@ -170,7 +170,7 @@ require 'includes/db.php';
                       <td> <?php echo $data['first_name']; ?></td>
                       <td> <?php echo $data['first_name']; ?></td>
                     </tr>
-                    <?php 
+                    <?php
                                    }
 
                             ?>
@@ -182,11 +182,9 @@ require 'includes/db.php';
 
         </div>
 
-          
+
   <?php
 include ('includes/script.php');
 include ('includes/footer.php');
 
   ?>
-
-  
