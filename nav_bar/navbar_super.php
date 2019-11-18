@@ -68,9 +68,8 @@
        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
            <h6 class="collapse-header">View Orders:</h6>
-           <a class="collapse-item" href="view_farm_orders.php">All Orders</a>
-           <a class="collapse-item" href="#">Delivered Orders</a>
-           <a class="collapse-item" href="#">Yet to be Delivered</a>
+           <a class="collapse-item" href="orders_supervisor.php">All Orders</a>
+           <a class="collapse-item" href="supervisor_delivered.php">Delivered Orders</a>
            <!-- <a class="collapse-item" href="utilities-other.">Scarer</a> -->
          </div>
        </div>

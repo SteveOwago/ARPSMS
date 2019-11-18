@@ -1,7 +1,7 @@
 <?php
-require 'includes/ses3.php';
+require 'includes/ses2.php';
 include ('includes/header.php');
-include ('nav_bar/navbar.php');
+include ('nav_bar/navbar_super.php');
 require 'includes/db1.php';
 require 'includes/display.php';
 
