@@ -84,8 +84,8 @@ if (isset($_POST['submit'])) {
 			if ($result == TRUE)
 			{
 
-			require '/PHPMailer/class.phpmailer.php';
-			require '/PHPMailer/class.smtp.php';
+			require '../PHPMailer/class.phpmailer.php';
+			require '../PHPMailer/class.smtp.php';
 			$mail = new PHPMailer;
 			$mail->setFrom('admin@example.com');
 			$mail->addAddress($email);
