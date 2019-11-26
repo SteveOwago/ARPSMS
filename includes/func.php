@@ -252,27 +252,23 @@ if (empty($phone) || empty($address) || empty($scheme_id) || empty($fno) || empt
 		$result = mysqli_query($conn,$sql);
 		$check = mysqli_num_rows($result);
 
-		if ($check > 0) {
-			 echo "<script type='text/javascript' class='alert alert-success'>alert('Unsuccessful! Farm already exist,please try again!')</script>";
-						echo '<meta http-equiv="refresh" content="0; url=../index.php">';
-		}
+					if ($check > 0) {
+						 echo "<script type='text/javascript' class='alert alert-success'>alert('Unsuccessful! Farm already exist,please try again!')</script>";
+									echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
+					}else
+							{
+							$sql = "INSERT INTO farms (phone,address,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$address','$scheme_id','$fno','$fsize','$user_id');";
+							$result = mysqli_query($conn,$sql);
 
-	else
-	{
-		$sql = "INSERT INTO farms (phone,address,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$address','$scheme_id','$fno','$fsize','$user_id');";
-		$result = mysqli_query($conn,$sql);
+									if ($result == TRUE) {
 
-		if ($result == TRUE) {
-
-						echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
-						echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
-		}
-		else
-		{
-			 echo "string" .$conn->error;
-		}
-	}
-}
+													echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
+													echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
+									}else{
+											 echo "string" .$conn->error;
+										}
+							}
+						}
 }
 
 ?>

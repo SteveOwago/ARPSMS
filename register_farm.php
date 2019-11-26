@@ -46,7 +46,7 @@ require 'includes/display.php';
                 </div>
                 <div class="card-body">
                 <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="First Name" name="fname" value="<?php echo $first_name;?>"><br>
-                <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Last Name"" name="lname" value="<?php echo $last_name;?>"><br>
+                <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Last Name" name="lname" value="<?php echo $last_name;?>"><br>
                 <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Username" name="uname" value="<?php echo $username;?>"><br>
                 </div>
               </div>
@@ -74,14 +74,14 @@ require 'includes/display.php';
                   <h6 class="m-0 font-weight-bold text-primary">Farm Information</h6>
                 </div>
                 <div class="card-body">
-      <select placeholder="Select scheme..." name="scheme" class="border-bottom-success border-right-success">
+      <select placeholder="Select scheme..." name="scheme_id" class="border-bottom-success border-right-success">
       <option value="" >Select scheme...</option>
       <?php
       $sql = "SELECT * FROM scheme";
       $result = mysqli_query($conn,$sql);
       while($data = mysqli_fetch_array($result)) {
       ?>
-      <option value="<?php echo $data['scheme_name']; ?>"><?php echo $data['scheme_name']; ?></option>
+      <option value="<?php echo $data['scheme_id']; ?>"><?php echo $data['scheme_name']; ?></option>
       <?php
       }
 
@@ -89,7 +89,7 @@ require 'includes/display.php';
      </select><br><br>
 
 
-             <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Number"" name="fno"><br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Number" name="fno"><br>
             <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Size" name="fsize"><br>
             <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Size" name="user_id" style="visibility:hidden;height:0px;"><br>
 

@@ -1,13 +1,12 @@
 
 <?php
-require 'includes/ses2.php';
-
-include_once ('includes/db1.php');
+ include_once ('includes/ses2.php');
+  include_once ('includes/db1.php');
 
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE php>
+<php lang="en">
 
 <head>
 
@@ -34,6 +33,7 @@ include_once ('includes/db1.php');
 
 <body id="page-top">
 
+
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -53,7 +53,7 @@ include_once ('includes/db1.php');
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="supervisor_page.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -70,7 +70,7 @@ include_once ('includes/db1.php');
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>User Management</span>
+          <span>Users Management</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -81,6 +81,9 @@ include_once ('includes/db1.php');
           </div>
         </div>
       </li>
+
+      <!-- Nav Item - Tables -->
+
 
       <!-- Nav Item - Tables -->
 
@@ -110,7 +113,7 @@ include_once ('includes/db1.php');
             <h6 class="collapse-header">View Orders:</h6>
             <a class="collapse-item" href="orders_supervisor.php">All Orders</a>
             <a class="collapse-item" href="supervisor_delivered.php">Delivered Orders</a>
-            <!-- <a class="collapse-item" href="utilities-other.">Scarer</a> -->
+            <!-- <a class="collapse-item" href="scarers.php">Bird Scarers</a> -->
           </div>
         </div>
       </li>
@@ -132,15 +135,15 @@ include_once ('includes/db1.php');
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Items:</h6>
-            <a class="collapse-item" href="add_items.php">Add Items</a>
-            <a class="collapse-item" href="delete_items.php">Delete Items</a>
+            <a class="collapse-item" href="view_messages.php">View Messages</a>
+            <!-- <a class="collapse-item" href="delete_items.php">Delete Items</a> -->
 
           </div>
         </div>
       </li>
 
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
           <i class="fas fa-fw fa-cog"></i>
           <span>Farm Management</span>
@@ -152,7 +155,16 @@ include_once ('includes/db1.php');
             <a class="collapse-item" href="view_scheme.php">Delete Schemes</a>
           </div>
         </div>
-      </li>
+      </li> -->
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+      </ul>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -163,7 +175,6 @@ include_once ('includes/db1.php');
 
     </ul>
     <!-- End of Sidebar -->
-
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -278,76 +289,67 @@ include_once ('includes/db1.php');
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">My Farm Orders</h6>
+              <h6 class="m-0 font-weight-bold text-primary">My Farmers</h6>
             </div>
+
             <div class="card-body">
-              <div class="table-responsive">
-                 <table class="table table-bordered table-stripped" id="farm_orders" width="100%" cellspacing="0">
-                  <thead class="bg-success">
-                    <tr class="text-bold text-white">
-                      <th><span class="fa fa-user"></span>&nbsp;Farmer</th>
-                      <th>Item</th>
-                      <th><span class="fa fa-coins"></span>&nbsp;Price</th>
-                      <th><span class="fa fa-list"></span>&nbsp;Quantity</th>
-                      <th><span class="fa fa-calendar"></span>&nbsp;Order Date</th>
-                      <th><span class="fa fa-cog"></span>&nbsp;Status</th>
-                      <th><span class="fa fa-tools"></span>&nbsp;Actions</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr class="text-bold">
-                      <th>Farmer</th>
-                      <th>Item</th>
-                      <th>Price</th>
-                      <th>Quantity</th>
-                      <th>Order Date</th>
-                      <th>Status</th>
-                      <th>Actions</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                   <?php
-                         include_once ('includes/fetch.php');
-                         $user_id = $_SESSION['user_id'];
-                         $data_sup = mysqli_fetch_array($resultsupervisor);
-                         $sup_id = $data_sup['sup_id'];
-                         if ($sup_id == $user_id) {
-                         while($data = mysqli_fetch_array($resultsupervisor)) { ?>
-                            <tr class="text-center">
-                              <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
-                              <td> <?php echo $data['product_name']; ?></td>
-                              <td> <?php echo $data['product_price']; ?></td>
-                              <td> <?php echo $data['product_quantity']; ?></td>
-                              <td> <?php echo $data['order_date']; ?></td>
-                              <td>
+              <!-- <?php
+              if(isset($_GET['error']))
+              {
+              if($_GET['error'] =="Successful"){
+              echo '<div class="alert alert-success" role="alert">Supervisor Deleted Successfully!</div>';
+              }
+              elseif ($_GET['error'] == "error") {
+              echo '<div class="alert alert-danger" role="alert">An Error Occured! Please Try Again!</div>';
+              }
+              }
+              ?> -->
 
-                              <?php
+              <?php
+                    include ('includes/fetch.php');
+                    $user_id = $_SESSION['user_id'];
+                    $data_sup = mysqli_fetch_array($resultfarmers);
+                     ?>
+                  <div class="table-responsive">
+                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                       <thead class="bg-success">
+                         <tr class="text-bold text-white">
+                           <th><span class="fa fa-users"></span>&nbsp;Farmers</th>
+                           <th><span class="fa fa-coins"></span>&nbsp;Email</th>
+                           <th><span class="fa fa-phone"></span>&nbsp;Phone</th>
+                           <th><span class="fa fa-tools"></span>&nbsp;Actions</th>
+                         </tr>
+                       </thead>
+                      <tfoot>
+                        <tr>
+                          <th>Farmers</th>
+                          <th>Email Address</th>
+                          <th>Phone Number</th>
+                          <th class="text-center">Actions</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                       <?php
+                       $sup_id = "SELECT sup_id FROM scheme WHERE  sup_id='".$_SESSION['user_id']."' ";
+                        $resultsup = mysqli_query($conn,$sup_id);
+                       while(($data = mysqli_fetch_array($resultfarmers))&&($resultsup= mysqli_fetch_array($resultsup))) {  ?>
+                        <tr>
+                          <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
+                          <td> <?php echo $data['email']; ?></td>
+                            <td> <?php echo $data['phone']; ?></td>
 
-                              if ($data['status'] == 0) {
-                              	echo "<i class='text-danger'>Not Delivered</i>";
-                              }
-                              elseif($data['status' == 1])
-                              {
-                              	echo "<i class='text-success'>Delivered</i>";
-                              }
-                               ?></td>
-                               <td><a href="edit_admins.php?na=<?php echo $data['order_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
-                                                 <a href="includes/delete_order.php?dl=<?php echo $data['order_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                           <td class="text-center" ><a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a> <a href="edit_farmers.php?efarmers=<?php echo $data['user_id']; ?>"><button type="button" class="btn btn-warning btn-sm">Suspend</button></a>
+                            <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
 
-                            </tr>
-                            <?php
-                                           }
+                        </tr>
+                        <?php
+                                       }
 
-                                    ?>
+                                ?>
+                      </tbody>
+                    </table>
+                  </div>
 
-
-                    <?php
-                                   }
-
-                            ?>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
 
@@ -361,7 +363,7 @@ include_once ('includes/db1.php');
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website <?php echo date("Y"); ?></span>
+            <span>Copyright &copy; Your Website 2019</span>
           </div>
         </div>
       </footer>
@@ -379,6 +381,7 @@ include_once ('includes/db1.php');
   </a>
 
   <!-- Logout Modal-->
+   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -413,17 +416,7 @@ include_once ('includes/db1.php');
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-
-    <script>
-          $(document).ready(function() {
-          $('#farm_orders').DataTable();
-          } );
-    </script>
-
 
 </body>
 
-</html>
+</php>

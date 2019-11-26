@@ -18,8 +18,12 @@ require 'includes/db1.php';
  $resultsupervisor = mysqli_query($conn,$sqlsupervisor);
 
  // Fetch Farmers
- $sqlfarmers = "SELECT * FROM register_db R,farms F WHERE R.user_id = F.farm_id";
+ $sqlfarmers = "SELECT * FROM register_db R,farms F WHERE R.user_id = F.user_id";
  $resultfarmers = mysqli_query($conn,$sqlfarmers);
+
+// Fetch suspended farmers
+$sqlsuspendedfarmers = "SELECT * FROM register_db WHERE role = 3 AND isSuspended = 1 ";
+$suspendedfarmers = mysqli_query($conn,$sqlsuspendedfarmers);
 
  // Fetch Schemes with their supervisors
  $sqlscheme = "SELECT * FROM scheme S, register_db R WHERE user_id = sup_id;";

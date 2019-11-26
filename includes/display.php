@@ -17,7 +17,7 @@
 
   if (isset($_GET['pf'])) {
     $pf = $_GET['pf'];
-    $query=mysqli_query($conn,"SELECT * FROM register_db R,farms F,scheme S WHERE F.scheme_id = S.scheme_id AND  email='$pf'");
+    $query=mysqli_query($conn,"SELECT * FROM register_db R,farms F,scheme S WHERE  email='$pf'");
     $data=mysqli_fetch_array($query);
     $email=$data['email'];
     $username=$data['username'];

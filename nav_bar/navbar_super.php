@@ -36,8 +36,9 @@
        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
            <h6 class="collapse-header">User Management:</h6>
-           <a class="collapse-item" href="#">Add Farmers</a>
-           <a class="collapse-item" href="update_farmers.php">Delete Farmers</a>
+           <a class="collapse-item" href="my_farmers.php">My Farmers</a>
+           <a class="collapse-item" href="suspend_farmers.php">Suspend Farmers</a>
+           <a class="collapse-item" href="delete_farmers.php">Delete Farmers</a>
          </div>
        </div>
      </li>
