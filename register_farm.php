@@ -1,6 +1,7 @@
  <?php
+include ('includes/ses3.php');
 include ('includes/header.php');
-include ('nav_bar/navbar_admin.php');
+include ('nav_bar/navbar.php');
 require 'includes/db1.php';
 require 'includes/display.php';
 
@@ -45,9 +46,9 @@ require 'includes/display.php';
                   <h6 class="m-0 font-weight-bold text-primary">Name Details</h6>
                 </div>
                 <div class="card-body">
-                <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="First Name" name="fname" value="<?php echo $first_name;?>"><br>
-                <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Last Name" name="lname" value="<?php echo $last_name;?>"><br>
-                <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Username" name="uname" value="<?php echo $username;?>"><br>
+                <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="First Name" name="fname" value="<?php echo $first_name;?>"><br>
+                <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="Last Name" name="lname" value="<?php echo $last_name;?>"><br>
+                <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="Username" name="uname" value="<?php echo $username;?>"><br>
                 </div>
               </div>
             </div>
@@ -61,8 +62,8 @@ require 'includes/display.php';
                 </div>
                 <div class="card-body">
             <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="Email Address" name="email" value="<?php echo $email;?>"><br>
-            <input class="card mb-4 py-3 border-bottom-success form-control" type="text"  id="phone" placeholder="Enter Phone Number" name="phone"> <br>
-            <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="Address" name="address"><br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="text"  id="phone" placeholder="Enter Phone Number" name="phone" value=""> <br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="text"  placeholder="Address" name="address" value=""><br>
                 </div>
               </div>
             </div>
@@ -75,7 +76,7 @@ require 'includes/display.php';
                 </div>
                 <div class="card-body">
       <select placeholder="Select scheme..." name="scheme_id" class="border-bottom-success border-right-success">
-      <option value="" >Select scheme...</option>
+      <option value="">Select scheme...</option>
       <?php
       $sql = "SELECT * FROM scheme";
       $result = mysqli_query($conn,$sql);
@@ -89,9 +90,9 @@ require 'includes/display.php';
      </select><br><br>
 
 
-            <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Number" name="fno"><br>
-            <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Size" name="fsize"><br>
-            <input class="card mb-4 py-3 border-bottom-success form-control" type="" placeholder="Farm Size" name="user_id" style="visibility:hidden;height:0px;"><br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="Farm Number" name="fno"><br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="Farm Size" name="fsize"><br>
+            <input class="card mb-4 py-3 border-bottom-success form-control" type="text" placeholder="User Id" name="user_id" value="<?php $user_id= $_SESSION['user_id'];?>" style="visibility:hidden;height:0px;"><br>
 
                 </div>
               </div>

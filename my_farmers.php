@@ -1,7 +1,9 @@
 
 <?php
- include_once ('includes/ses2.php');
-  include_once ('includes/db1.php');
+
+include('includes/ses2.php');
+include('includes/db1.php');
+
 
 
 ?>
@@ -76,7 +78,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">User Management:</h6>
             <a class="collapse-item" href="my_farmers.php">My Farmers</a>
-            <a class="collapse-item" href="suspend_farmers.php">Suspend Farmers</a>
+            <a class="collapse-item" href="suspended_farmers.php">Suspend Farmers</a>
             <a class="collapse-item" href="update_farmers.php">Delete Farmers</a>
           </div>
         </div>
@@ -305,11 +307,6 @@
               }
               ?> -->
 
-              <?php
-                    include ('includes/fetch.php');
-                    $user_id = $_SESSION['user_id'];
-                    $data_sup = mysqli_fetch_array($resultfarmers);
-                     ?>
                   <div class="table-responsive">
                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                        <thead class="bg-success">
@@ -330,22 +327,96 @@
                       </tfoot>
                       <tbody>
                        <?php
-                       $sup_id = "SELECT sup_id FROM scheme WHERE  sup_id='".$_SESSION['user_id']."' ";
-                        $resultsup = mysqli_query($conn,$sup_id);
-                       while(($data = mysqli_fetch_array($resultfarmers))&&($resultsup= mysqli_fetch_array($resultsup))) {  ?>
-                        <tr>
-                          <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
-                          <td> <?php echo $data['email']; ?></td>
-                            <td> <?php echo $data['phone']; ?></td>
+                       include ('includes/fetch.php');
+                       $user_id = $_SESSION['user_id'];
+                       $sqlsupervisor_id = "SELECT sup_id FROM scheme WHERE sup_id = '".$_SESSION['user_id']."'";
+                       $result_sup = mysqli_query($conn,$sqlsupervisor_id);
+                       $data_sup = mysqli_fetch_array($result_sup);
+                       $supervisor_id = $data_sup['sup_id'];
+                       if ($supervisor_id == $user_id) {
+                         $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.user_id AND S.sup_id = F.supa_id AND R.role = 3 AND S.sup_id = '".$_SESSION['user_id']."' ";
+                         $resultfarmers = mysqli_query($conn,$sqlfarmers);
+                         while(($data_farmers = mysqli_fetch_array($resultfarmers))>0) {
+                           foreach ($resultfarmers as $farmer => $data_farmer) {?>
+                             <tr>
+                               <td> <?php echo $data_farmer['first_name']; ?>&nbsp;<?php echo $data_farmer['last_name']; ?></td>
+                               <td> <?php echo $data_farmer['email']; ?></td>
+                                 <td> <?php echo $data_farmer['phone']; ?></td>
 
-                           <td class="text-center" ><a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a> <a href="edit_farmers.php?efarmers=<?php echo $data['user_id']; ?>"><button type="button" class="btn btn-warning btn-sm">Suspend</button></a>
-                            <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                                <td class="text-center" ><a href="#" data-id="<?php echo $farmer_id = $data_farmer['user_id']; ?>" data-toggle="modal" data-target="#viewModal<?php echo $data_farmer['user_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
+                                 <a href="#" data-toggle="modal" data-target="#suspendModal<?php echo $data_farmer['user_id']; ?>"><button type="button"  class="btn btn-warning btn-sm" >Suspend</button></a>
+                                 </td>
 
-                        </tr>
-                        <?php
-                                       }
+                             </tr>
 
-                                ?>
+                             <!-- Suspend Modal-->
+                           <div class="modal" id="suspendModal<?php echo $data_farmer['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                             <div class="modal-dialog" role="document">
+                               <form action="includes/func.php" method="GET">
+                                 <div class="modal-content">
+                                   <div class="modal-header bg-warning">
+                                     <h5 class="modal-title">Suspend this Farmer</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                     </button>
+                                   </div>
+                                   <div class="modal-body">
+                                     <p><ul>
+                                         <li><strong>Farm Number:</strong>&nbsp;<?php echo $data_farmer['fnumber']; ?></li>
+                                         <li><strong>Email Address:</strong>&nbsp;<?php echo $data_farmer['email']; ?></li>
+                                         <li><strong>Phone Number:</strong>&nbsp;<?php echo $data_farmer['phone']; ?></li>
+
+                                       </ul>
+                                     </p>
+                                   </div>
+                                   <div class="modal-footer">
+                                     <a href="includes/func.php?id_farmer= <?php echo $data_farmer['user_id']; ?>">
+                                     <button  type="button"name="suspend" value="suspend" class="btn btn-warning">Suspend</button>
+                                     </a>
+                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                   </div>
+                                 </div>
+                               </form>
+                             </div>
+                           </div>
+
+
+                           <!-- View Modal-->
+                         <div class="modal" id="viewModal<?php echo $data_farmer['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog" role="document">
+                             <form action="includes/func.php" method="POST">
+                               <div class="modal-content">
+                                 <div class="modal-header bg-success">
+                                   <h5 class="modal-title">Farmer Details</h5>
+                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                   </button>
+                                 </div>
+                                 <div class="modal-body">
+                                   <p><ul>
+                                       <li><strong>Farm Number:</strong>&nbsp;<?php echo $data_farmer['fnumber']; ?></li>
+                                       <li><strong>Email Address:</strong>&nbsp;<?php echo $data_farmer['email']; ?></li>
+                                       <li><strong>Phone Number:</strong>&nbsp;<?php echo $data_farmer['phone']; ?></li>
+
+                                     </ul>
+                                   </p>
+                                 </div>
+                                 <div class="modal-footer">
+                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                 </div>
+                               </div>
+                             </form>
+                           </div>
+                         </div>
+
+
+                           <?php
+                                      }
+                                    }
+                            }
+
+                                  ?>
+
                       </tbody>
                     </table>
                   </div>
@@ -380,7 +451,9 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
+
+
+
    <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -416,6 +489,13 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+   <script>
+      $(document).ready(function(){
+        $('#suspendModal').on('hidden.bs.modal',function(){
+          $(this).removeData('bs.modal');
+        });
+      });
+  </script>
 
 </body>
 

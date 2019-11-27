@@ -230,48 +230,113 @@ if (isset($_POST['register_farm'])) {
 
 
 $fname = trim($_POST['fname']);
+$fname = mysqli_real_escape_string($conn, $fname);
+
 $lname = trim($_POST['lname']);
+$lname = mysqli_real_escape_string($conn, $lname);
+
 $uname = trim($_POST['uname']);
+$uname = mysqli_real_escape_string($conn, $uname);
+
 $email = trim($_POST['email']);
+$email = mysqli_real_escape_string($conn, $email);
+
 $phone = trim($_POST['phone']);
+$phone = mysqli_real_escape_string($conn, $phone);
+
 $address = trim($_POST['address']);
+$address = mysqli_real_escape_string($conn, $address);
+
 $scheme_id = trim($_POST['scheme_id']);
+$scheme_id = mysqli_real_escape_string($conn, $scheme_id);
+
 $fno = trim($_POST['fno']);
+$fno = mysqli_real_escape_string($conn, $fno);
+
 $fsize= trim($_POST['fsize']);
+$fsize = mysqli_real_escape_string($conn, $fsize);
+
 $user_id = trim($_POST['user_id']);
+$user_id = mysqli_real_escape_string($conn, $user_id);
 
-if (empty($phone) || empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empty($user_id))
 
-	 {
+if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empty($user_id) )
+
+	 	{
 		 header("Location:../register_farm.php?error=EmptyFields");
 		 exit();
-	}
-	else
-	{
-		$sql = "SELECT * FROM register_db JOIN farms ON register_db.user_id = farms.user_id WHERE email = '$email' && fnumber='$fno'";
-		$result = mysqli_query($conn,$sql);
-		$check = mysqli_num_rows($result);
 
-					if ($check > 0) {
-						 echo "<script type='text/javascript' class='alert alert-success'>alert('Unsuccessful! Farm already exist,please try again!')</script>";
-									echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
-					}else
-							{
-							$sql = "INSERT INTO farms (phone,address,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$address','$scheme_id','$fno','$fsize','$user_id');";
-							$result = mysqli_query($conn,$sql);
+		}else
+					{
+						$sql = "SELECT * FROM register_db R, farms F WHERE R.user_id = F.user_id AND email = '$email'";
+						$result = mysqli_query($conn,$sql);
+						$check = mysqli_num_rows($result);
 
-									if ($result == TRUE) {
+						if ($check > 0) {
+															 echo "<script type='text/javascript' class='alert alert-success'>alert('Unsuccessful! Farm already exist,please try again!')</script>";
+																		echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
+														}else	{
+																		$sql = "INSERT INTO farms (phone,address,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$address','$scheme_id','$fno','$fsize','$user_id');";
+																		$result1 = mysqli_query($conn,$sql);
 
-													echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
-													echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
-									}else{
-											 echo "string" .$conn->error;
-										}
-							}
-						}
+																		if ($result1 == TRUE) {
+
+																						echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
+																						echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
+																		}
+																		else
+																		{
+																			 echo "Please Try again Later! or Contact the administrator!" .$conn->error;
+																		}
+																	}
+					}
 }
 
 ?>
+
+// Suspend Farmers
+<?php
+	if (!(isset($_GET['suspend']))){
+		$idfarmer = $_GET['id_farmer'];
+		$sqlsuspendfarmer = "UPDATE register_db SET isSuspended = 1 WHERE user_id = $idfarmer";
+		$resultsuspendfarmer = mysqli_query($conn,$sqlsuspendfarmer);
+		if ($resultsuspendfarmer) {
+				header("Location:../my_farmers.php");
+			}else {
+			header("Location:../my_farmers.php");
+		}
+
+	}else {
+		echo "Cool Bro Try Later!";
+	}
+
+
+
+ ?>
+
+//Retrieve Suspension
+<?php
+	if (!(isset($_GET['RetrieveSus']))){
+		$idfarmer1 = $_GET['id_farmer1'];
+		$sqlsuspendfarmer1 = "UPDATE register_db SET isSuspended = 0 WHERE user_id = $idfarmer1";
+		$resultsuspendfarmer1 = mysqli_query($conn,$sqlsuspendfarmer1);
+		if ($resultsuspendfarmer1) {
+				header("Location:../suspended_farmers.php");
+			}else {
+			header("Location:../suspended_farmers.php");
+		}
+
+	}else {
+		echo "Cool Bro Try Later!";
+	}
+
+
+
+ ?>
+
+
+
+
 <?php
 
 //Add items
@@ -301,6 +366,7 @@ else
 }
 }
 }
+
 
 
 //Change Password

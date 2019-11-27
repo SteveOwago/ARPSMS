@@ -76,7 +76,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">User Management:</h6>
             <a class="collapse-item" href="my_farmers.php">My Farmers</a>
-            <a class="collapse-item" href="suspend_farmers.php">Suspend Farmers</a>
+            <a class="collapse-item" href="suspended_farmers.php">Suspend Farmers</a>
             <a class="collapse-item" href="update_farmers.php">Delete Farmers</a>
           </div>
         </div>
@@ -335,11 +335,40 @@
                           <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
                           <td> <?php echo $data['email']; ?></td>
 
-                           <td class="text-center" ><a href="edit_farmers.php?efarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
-                             <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
-                            <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                           <td class="text-center" ><a href="#" data-toggle="modal" data-target="#RetrieveSusModal<?php echo $data['user_id']; ?>"><button type="button" class="btn btn-info btn-sm btn-block
+                             "><i class="fas fa-level-up-alt"></i>&nbsp;Retrieve Suspension</button></a>
+                             </td>
 
                         </tr>
+                        <!-- RetreaveSuspention Modal-->
+                      <div class="modal" id="RetrieveSusModal<?php echo $data['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <form action="includes/func.php" method="GET">
+                            <div class="modal-content">
+                              <div class="modal-header bg-info">
+                                <h5 class="modal-title">Retrieve Suspension for this Farmer?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  <ul>
+                                    <li><strong>Farmer Names:</strong>&nbsp;<?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></li>
+                                    <li><strong>Email Address:</strong>&nbsp;<?php echo $data['email']; ?></li>
+                                  </ul>
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                                <a href="includes/func.php?id_farmer1= <?php echo $data['user_id']; ?>">
+                                <button  type="button"name="RetrieveSus" value="RetrieveSus" class="btn btn-info">Save Changes</button>
+                                </a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                         <?php
                                        }
 

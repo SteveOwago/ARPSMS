@@ -141,7 +141,7 @@ require 'includes/db1.php';
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profile.php?pf=<?php echo $_SESSION['email'] ;?>">
+                <a class="dropdown-item" href="profile_supervisor.php?pf=<?php echo $_SESSION['email'] ;?>">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>

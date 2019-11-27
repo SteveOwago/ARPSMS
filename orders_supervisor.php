@@ -312,7 +312,7 @@ include_once ('includes/db1.php');
                          $data_sup = mysqli_fetch_array($resultsupervisor);
                          $sup_id = $data_sup['sup_id'];
                          if ($sup_id == $user_id) {
-                         while($data = mysqli_fetch_array($resultsupervisor)) { ?>
+                         while($data = mysqli_fetch_array($result)) { ?>
                             <tr class="text-center">
                               <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
                               <td> <?php echo $data['product_name']; ?></td>
