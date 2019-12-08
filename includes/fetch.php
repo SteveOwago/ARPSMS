@@ -2,9 +2,9 @@
 require 'includes/db1.php';
 
 
-	// Fetch farm details
- $sqlinfo = "SELECT * FROM orders O JOIN products P , register_db R WHERE R.user_id = O.user_id AND O.product_id=P.product_id";
- $result = mysqli_query($conn, $sqlinfo);
+	// // Fetch farm details
+ // $sqlinfo = "SELECT * FROM orders JOIN products ON orders.order_id = products.product_id";
+ // $result = mysqli_query($conn, $sqlinfo);
 
  $sql1 = "SELECT fnumber FROM farms F,register_db R WHERE F.farm_id = R.user_id ";
  $result1 = mysqli_query($conn, $sql1);
@@ -23,7 +23,28 @@ require 'includes/db1.php';
 
  // Fetch Schemes without Supervisors
  // Fetch Farmers
- $sqlscheme2 = "SELECT * FROM scheme S,register_db R WHERE S.scheme_id = R.user_id AND S.sup_id IS NULL ";
+ $sqlscheme2 = "SELECT * FROM scheme S WHERE sup_id IS NULL; ";
  $resultscheme2 = mysqli_query($conn,$sqlscheme2);
+
+ //Orders
+ $sqlorders = "SELECT * FROM register_db R,orders O,products P WHERE R.user_id = O.user_id AND O.product_id = P.product_id";
+ $resultorders = mysqli_query($conn,$sqlorders);
+
+ //All Orders
+ $sqlorders = "SELECT * FROM register_db R,orders O,products P WHERE R.user_id = O.user_id AND O.product_id = P.product_id";
+ $resultorders_delivered = mysqli_query($conn,$sqlorders);
+
+ //Not delivered
+ $sqlorders = "SELECT * FROM register_db R,orders O,products P WHERE R.user_id = O.user_id AND O.product_id = P.product_id AND O.status = 0";
+ $resultorders_notdelivered = mysqli_query($conn,$sqlorders);
+
+ //Delivered
+
+  $sqlorders = "SELECT * FROM register_db R,orders O,products P WHERE R.user_id = O.user_id AND O.product_id = P.product_id AND O.status = 1";
+ $resultorders_delivered = mysqli_query($conn,$sqlorders);
+
+ //Products
+   $sqlproducts = "SELECT * FROM products P, brands B WHERE P.brand_id = B.brand_id";
+ $resultproducts = mysqli_query($conn,$sqlproducts);
 
 ?>

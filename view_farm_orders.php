@@ -1,6 +1,6 @@
 
 <?php
-require 'includes/ses2.php';
+ include_once ('includes/ses.php');
 include_once ('includes/db1.php');
 
 
@@ -28,6 +28,25 @@ include_once ('includes/db1.php');
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style>
+  .content-table thead tr{
+
+   color: #ffffff;
+   text-align: left;
+   font-weight: bold;
+  }
+  .content-table th,.content-table td{
+    padding: 12px 15px;
+  }
+  .content-table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+  }
+  .content-table{
+    border-collapse: collapse;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+  </style>
 
 </head>
 
@@ -91,8 +110,8 @@ include_once ('includes/db1.php');
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Activities:</h6>
-            <a class="collapse-item" href="cards.html">View Activities</a>
-            <a class="collapse-item" href="farm.php">Add Activities</a>
+            <a class="collapse-item" href="admin_view_activities.php">View Activities</a>
+            <a class="collapse-item" href="add_activities.php?addactivity=<?php echo $_SESSION['email'] ;?>">Add Activities</a>
           </div>
         </div>
       </li>
@@ -105,10 +124,10 @@ include_once ('includes/db1.php');
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">View Orders:</h6>
+              <h6 class="collapse-header">View Orders:</h6>
             <a class="collapse-item" href="view_farm_orders.php">All Orders</a>
-            <a class="collapse-item" href="utilities-border.html">Delivered Orders</a>
-            <a class="collapse-item" href="utilities-animation.html">Yet to be Delivered</a>
+            <a class="collapse-item" href="view_delivered_orders.php">Delivered Orders</a>
+            <a class="collapse-item" href="view_notdelivered_orders.php">Yet to be Delivered</a>
             <!-- <a class="collapse-item" href="utilities-other.html">Scarer</a> -->
           </div>
         </div>
@@ -130,11 +149,10 @@ include_once ('includes/db1.php');
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">View Orders:</h6>
-            <a class="collapse-item" href="add_items.php">Tractors</a>
-            <a class="collapse-item" href="add_items.php">Fertilizers</a>
-            <a class="collapse-item" href="add_items.php">Seeds</a>
-            <a class="collapse-item" href="add_items.php">Scarers</a>
+           <h6 class="collapse-header">Items:</h6>
+            <a class="collapse-item" href="add_item.php">Add Items</a>
+            <a class="collapse-item" href="view_products.php">Update Items</a>
+
           </div>
         </div>
       </li>
@@ -148,8 +166,8 @@ include_once ('includes/db1.php');
         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Schemes:</h6>
-            <a class="collapse-item" href="cards.html">Add Schemes</a>
-            <a class="collapse-item" href="farm.php">Delete Schemes</a>
+            <a class="collapse-item" href="add_schemes.php">Add Schemes</a>
+            <a class="collapse-item" href="view_scheme.php">Update Schemes</a>
           </div>
         </div>
       </li>
@@ -226,7 +244,7 @@ include_once ('includes/db1.php');
             while ($user = mysqli_fetch_object($result)) {
             ?>
             <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-weight: bold;"><?php echo $user->first_name; ?>   <?php echo $user->last_name;  ?></span>
-            <?php
+            <?
             }
 
           }
@@ -277,55 +295,74 @@ include_once ('includes/db1.php');
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">All Farm Orders</h6>
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
+
             <div class="card-body">
+
+              <!-- Display Error Message -->
+              <?php
+               if(isset($_GET['error']))
+               {
+               if($_GET['error'] =="Successful"){
+               echo '<div class="alert alert-success" role="alert">Supervisor Deleted Successfully!</div>';
+               }
+               elseif ($_GET['error'] == "error") {
+               echo '<div class="alert alert-danger" role="alert">An Error Occured! Please Try Again!</div>';
+               }
+               }
+              ?>
               <div class="table-responsive">
-                 <table class="table table-bordered table-stripped" id="farm_orders" width="100%" cellspacing="0">
-                  <thead class="bg-primary">
-                    <tr class="text-bold text-white">
-                      <th><span class="fa fa-user"></span>&nbsp;Farmer</th>
-                      <th>Item</th>
-                      <th><span class="fa fa-coins"></span>&nbsp;Price</th>
-                      <th><span class="fa fa-list"></span>&nbsp;Quantity</th>
-                      <th><span class="fa fa-calendar"></span>&nbsp;Order Date</th>
-                      <th><span class="fa fa-cog"></span>&nbsp;Status</th>
-                      <th><span class="fa fa-tools"></span>&nbsp;Actions</th>
+                 <table class="table table-bordered content-table " id="dataTable" width="100%" cellspacing="0">
+                  <thead class="bg-success">
+                    <tr>
+                      <th>Email Address</th>
+                      <th>Order Name</th>
+                      <th>Quantity</th>
+
+                      <th>Expected Delivery</th>
+                        <th>Status</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tfoot>
-                    <tr class="text-bold">
-                      <th>Farmer</th>
-                      <th>Item</th>
-                      <th>Price</th>
+                    <tr>
+                      <th>Email Address</th>
+                      <th>Order Name</th>
                       <th>Quantity</th>
-                      <th>Order Date</th>
-                      <th>Status</th>
-                      <th>Actions</th>
+                      <th>Expected Delivery</th>
+                        <th>Status</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </tfoot>
                   <tbody>
                    <?php
                   include_once ('includes/fetch.php');
-                   while($data = mysqli_fetch_array($result)) {  ?>
-                    <tr class="text-center">
-                      <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
-                      <td> <?php echo $data['product_name']; ?></td>
-                      <td> <?php echo $data['product_price']; ?></td>
+                   while($data = mysqli_fetch_array($resultorders)) {  ?>
+                    <tr>
+
+                      <td> <?php echo $data['email']; ?></td>
+                      <td><?php echo $data['product_name']; ?></td>
                       <td> <?php echo $data['product_quantity']; ?></td>
-                      <td> <?php echo $data['order_date']; ?></td>
+                      <td> <?php echo $data['expected_delivery']; ?></td>
                       <td> <?php
 
-                      if ($data['status'] == 0) {
-                      	echo "<i class='text-danger'>Not Delivered</i>";
+                      $sql = "SELECT status FROM orders;";
+                      $result = mysqli_query($conn,$sql);
+                      $count = mysqli_num_rows($result);
+                      $data = mysqli_fetch_array($result);
+                      if ($data['status'] == '0') {
+                         echo "No Delivered";
                       }
-                      elseif($data['status' == 1])
-                      {
-                      	echo "<i class='text-success'>Delivered</i>";
+                      else{
+                        echo "Delivered";
                       }
+
                        ?></td>
-                       <td><a href="edit_admins.php?na=<?php echo $data['order_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
-                                         <a href="includes/delete.php?dl=<?php echo $data['order_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+
+                       <td class="text-center">
+                         <a href="view_supervisor.php?vsuper=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm"><i class = "fa fa-eye"></i></button></a>
+                        <a href="includes/delete.php?dsuper=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-danger btn-sm"><i class = "fa fa-trash"></i></button></a></td>
 
                     </tr>
                     <?php
@@ -348,7 +385,7 @@ include_once ('includes/db1.php');
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website <?php echo date("Y"); ?></span>
+            <span>Copyright &copy; Your Website 2019</span>
           </div>
         </div>
       </footer>
@@ -366,6 +403,7 @@ include_once ('includes/db1.php');
   </a>
 
   <!-- Logout Modal-->
+   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -400,16 +438,6 @@ include_once ('includes/db1.php');
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-
-    <script>
-          $(document).ready(function() {
-          $('#farm_orders').DataTable();
-          } );
-    </script>
-
 
 </body>
 

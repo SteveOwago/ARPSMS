@@ -408,40 +408,7 @@ exit();
 }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
-
 
 // Check if submit button is clicked
 
