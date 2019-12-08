@@ -70,14 +70,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Update Users</span>
+          <span>User Management</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Update Users:</h6>
+            <h6 class="collapse-header">User Management:</h6>
             <a class="collapse-item" href="my_farmers.php">My Farmers</a>
-            <a class="collapse-item" href="update_supervisors.php">Supervisors</a>
-            <a class="collapse-item" href="update_farmers.php">Farmers</a>
+            <a class="collapse-item" href="suspend_farmers.php">Suspend Farmers</a>
+            <a class="collapse-item" href="delete_farmers.php">Delete Farmers</a>
           </div>
         </div>
       </li>
@@ -88,13 +88,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Activities</span>
+          <span>Notifications</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Activities:</h6>
-            <a class="collapse-item" href="activities.php">View Activities</a>
-            <a class="collapse-item" href="add_activities.php">Add Activities</a>
+            <h6 class="collapse-header">Notifications:</h6>
+            <a class="collapse-item" href="#">Add Notifications</a>
+            <a class="collapse-item" href="farm.php">Delete Notifications</a>
           </div>
         </div>
       </li>
@@ -103,15 +103,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>Orders</span>
+          <span>My Orders</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">View Orders:</h6>
-            <a class="collapse-item" href="view_farm_orders.php">All Orders</a>
-            <a class="collapse-item" href="utilities-border.php">Delivered Orders</a>
-            <a class="collapse-item" href="utilities-animation.php">Yet to be Delivered</a>
-            <!-- <a class="collapse-item" href="utilities-other.php">Scarer</a> -->
+            <a class="collapse-item" href="orders_supervisor.php">All Orders</a>
+            <a class="collapse-item" href="supervisor_delivered.php">Delivered Orders</a>
+            <!-- <a class="collapse-item" href="utilities-other.">Scarer</a> -->
           </div>
         </div>
       </li>
@@ -128,33 +127,18 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Add Items</span>
+          <span>Messages</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">View Orders:</h6>
-            <a class="collapse-item" href="add_items.php">Tractors</a>
-            <a class="collapse-item" href="add_items.php">Fertilizers</a>
-            <a class="collapse-item" href="add_items.php">Seeds</a>
-            <a class="collapse-item" href="add_items.php">Scarers</a>
+            <h6 class="collapse-header">Items:</h6>
+            <a class="collapse-item" href="add_items.php">Add Items</a>
+            <a class="collapse-item" href="delete_items.php">Delete Items</a>
+
           </div>
         </div>
       </li>
 
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Schemes</span>
-        </a>
-        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Schemes:</h6>
-            <a class="collapse-item" href="scheme.php">Add Schemes</a>
-            <a class="collapse-item" href="delete.php">Delete Schemes</a>
-          </div>
-        </div>
-      </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -279,7 +263,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Delete Farmers</h6>
             </div>
 
             <div class="card-body">

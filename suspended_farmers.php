@@ -142,20 +142,6 @@
         </div>
       </li>
 
-
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Farm Management</span>
-        </a>
-        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Farm Management:</h6>
-            <a class="collapse-item" href="add_schemes.php">Add Schemes</a>
-            <a class="collapse-item" href="view_scheme.php">Delete Schemes</a>
-          </div>
-        </div>
-      </li> -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

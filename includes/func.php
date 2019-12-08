@@ -1,10 +1,5 @@
 <?php
 
-
-// Including database connection
-
-
-
 // Including database connection
 include_once ('db1.php');
 
@@ -307,7 +302,7 @@ if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empt
 		}
 
 	}else {
-		echo "Cool Bro Try Later!";
+		echo '<span>Cool! Try Again Later!</span>';
 	}
 
 
@@ -327,7 +322,7 @@ if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empt
 		}
 
 	}else {
-		echo "Cool Bro Try Later!";
+		echo '<span>Cool! Try Again Later!</span>';
 	}
 
 
