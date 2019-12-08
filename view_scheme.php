@@ -1,7 +1,8 @@
 
 <?php
- include_once ('includes/ses.php');
-  include_once ('includes/db1.php');
+require ('includes/ses.php');
+include_once ('includes/ses.php');
+include_once ('includes/db1.php');
 
 
 ?>
@@ -28,11 +29,31 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style>
+  .content-table thead tr{
+   background-color: #009879;
+   color: #ffffff;
+   text-align: left;
+   font-weight: bold;
+  }
+  .content-table th,.content-table td{
+    padding: 12px 15px;
+  }
+  .content-table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+  }
+  .content-table{
+    border-collapse: collapse;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+  </style>
+
+
 
 </head>
 
 <body id="page-top">
-
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -92,8 +113,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Activities:</h6>
-            <a class="collapse-item" href="activities.php">View Activities</a>
-            <a class="collapse-item" href="add_activities.php">Add Activities</a>
+            <a class="collapse-item" href="admin_view_activities.php">View Activities</a>
+            <a class="collapse-item" href="add_activities.php?addactivity=<?php echo $_SESSION['email'] ;?>">Add Activities</a>
           </div>
         </div>
       </li>
@@ -106,11 +127,11 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">View Orders:</h6>
+              <h6 class="collapse-header">View Orders:</h6>
             <a class="collapse-item" href="view_farm_orders.php">All Orders</a>
-            <a class="collapse-item" href="utilities-border.php">Delivered Orders</a>
-            <a class="collapse-item" href="utilities-animation.php">Yet to be Delivered</a>
-            <!-- <a class="collapse-item" href="utilities-other.php">Scarer</a> -->
+            <a class="collapse-item" href="view_delivered_orders.php">Delivered Orders</a>
+            <a class="collapse-item" href="view_notdelivered_orders.php">Yet to be Delivered</a>
+            <!-- <a class="collapse-item" href="utilities-other.html">Scarer</a> -->
           </div>
         </div>
       </li>
@@ -131,11 +152,10 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">View Orders:</h6>
-            <a class="collapse-item" href="add_items.php">Tractors</a>
-            <a class="collapse-item" href="add_items.php">Fertilizers</a>
-            <a class="collapse-item" href="add_items.php">Seeds</a>
-            <a class="collapse-item" href="add_items.php">Scarers</a>
+           <h6 class="collapse-header">Items:</h6>
+            <a class="collapse-item" href="add_item.php">Add Items</a>
+            <a class="collapse-item" href="view_products.php">Update Items</a>
+
           </div>
         </div>
       </li>
@@ -150,8 +170,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Schemes:</h6>
             <a class="collapse-item" href="add_schemes.php">Add Schemes</a>
-            <a class="collapse-item" href="update_scheme.php">Update Schemes</a>
-            <a class="collapse-item" href="view_scheme.php">Delete Schemes</a>
+            <a class="collapse-item" href="view_scheme.php">Update Schemes</a>
           </div>
         </div>
       </li>
@@ -295,23 +314,25 @@
               }
               ?>
               <div class="table-responsive">
-                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                 <table class="table table-bordered content-table" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Scheme Number</th>
+
                       <th>Scheme Name</th>
                       <th>Supervisor</th>
                       <th>Supervisor Start Date</th>
+                       <th>Status</th>
 
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Scheme Number</th>
+
                       <th>Scheme Name</th>
                       <th>Supervisor</th>
                       <th>Supervisor Start Date</th>
+                       <th>Status</th>
 
 
 
@@ -323,14 +344,27 @@
                   include_once ('includes/fetch.php');
                    while($data = mysqli_fetch_array($resultscheme)) {  ?>
                     <tr>
-                      <td> <?php echo $data['scheme_id']; ?></td>
+
                       <td> <?php echo $data['scheme_name']; ?></td>
                       <td><?php echo $data['first_name']; ?></td>
                       <td> <?php echo $data['sup_start_date']; ?></td>
+                       <td> <?php
 
 
-                       <td class="text-center" ><a href="edit_scheme.php?efarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
-                        <a href="delete_scheme.php?dlscheme=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                      if ($data['role'] != 2) {
+                         echo '<p class = "text-danger">Inactive</p>';
+                      }
+                      elseif($data['role'] == 2) {
+                        echo '<p class = "text-success">Active</p>';
+                      }
+
+
+
+                        ?></td>
+
+
+                       <td class="text-center" ><a href="edit_scheme.php?esupervisorscheme=<?php echo $data['email']; ?>"><button type="button" class="btn btn-info btn-sm"><i class = "fa fa-edit"></i></button></a>
+                        <a href="delete_scheme.php?dlscheme=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-danger btn-sm"><i class = "fa fa-trash"></i></button></a></td>
 
                     </tr>
                     <?php

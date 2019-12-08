@@ -28,6 +28,25 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style>
+  .content-table thead tr{
+   background-color: #009879;
+   color: #ffffff;
+   text-align: left;
+   font-weight: bold;
+  }
+  .content-table th,.content-table td{
+    padding: 12px 15px;
+  }
+  .content-table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+  }
+  .content-table{
+    border-collapse: collapse;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+  </style>
 
 </head>
 
@@ -227,7 +246,7 @@
             while ($user = mysqli_fetch_object($result)) {
             ?>
             <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-weight: bold;"><?php echo $user->first_name; ?>   <?php echo $user->last_name;  ?></span>
-            <?php
+            <?
             }
 
           }
@@ -294,7 +313,7 @@
               }
               ?>
               <div class="table-responsive">
-                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                 <table class="table table-bordered content-table" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Username</th>
