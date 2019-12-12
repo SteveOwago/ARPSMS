@@ -1,6 +1,5 @@
 <?php
 
-
 // Including database connection
 include_once ('db1.php');
 
@@ -238,7 +237,11 @@ $email = trim($_POST['email']);
 $email = mysqli_real_escape_string($conn, $email);
 
 $phone = trim($_POST['phone']);
-$phone2 = trim($_POST['phone2']);
+$phone = mysqli_real_escape_string($conn, $phone);
+
+$address = trim($_POST['address']);
+$address = mysqli_real_escape_string($conn, $address);
+
 $scheme_id = trim($_POST['scheme_id']);
 $scheme_id = mysqli_real_escape_string($conn, $scheme_id);
 
@@ -251,12 +254,10 @@ $fsize = mysqli_real_escape_string($conn, $fsize);
 $user_id = trim($_POST['user_id']);
 $user_id = mysqli_real_escape_string($conn, $user_id);
 
-if (empty($phone) || empty($phone2) || empty($scheme_id) || empty($fno) || empty($fsize) || empty($user_id))
 
 	 	{
 		 header("Location:../register_farm.php?error=EmptyFields");
 		 exit();
-
 	}
 	else
 	{
@@ -268,15 +269,11 @@ if (empty($phone) || empty($phone2) || empty($scheme_id) || empty($fno) || empty
 						if ($check > 0) {
 															 echo "<script type='text/javascript' class='alert alert-success'>alert('Unsuccessful! Farm already exist,please try again!')</script>";
 																		echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
-
-														}else
-																{
-																	$sql = "INSERT INTO farms (phone,phone2,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$phone2','$scheme_id','$fno','$fsize','$user_id');";
-																	$result = mysqli_query($conn,$sql);
-
+														}else	{
+																		$sql = "INSERT INTO farms (phone,address,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$address','$scheme_id','$fno','$fsize','$user_id');";
+																		$result1 = mysqli_query($conn,$sql);
 
 																		if ($result1 == TRUE) {
-
 
 																						echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
 																						echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
@@ -299,10 +296,6 @@ if (empty($phone) || empty($phone2) || empty($scheme_id) || empty($fno) || empty
 				header("Location:../my_farmers.php?error=Successful");
 			}else {
 			header("Location:../my_farmers.php");
-
-						echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
-						echo '<meta http-equiv="refresh" content="0; url=../map.php">';
-
 		}
 
 	}else {
@@ -437,7 +430,7 @@ $output = 'Hi. Please click this link to reset your password.<br>'.$url;
 if ($email == $emailData) {
 
 
-			require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+							require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 			require '/usr/share/php/libphp-phpmailer/class.smtp.php';
 			$mail = new PHPMailer;
 			$mail->setFrom('admin@example.com');
@@ -470,114 +463,139 @@ exit();
 }
 }
 
-//Add Activities
+?>
 
-if (isset($_POST['add_activity'])) {
+<?php
 
-	$author = trim($_POST['author']);
-	$activity = trim($_POST['activity']);
-	$adate = trim($_POST['adate']);
-	$atime = trim($_POST['atime']);
-	$venue = trim($_POST['venue']);
+//Add items
 
-	//Check Empty
+if (isset($_POST['add_item'])) {
+$product_category = mysqli_real_escape_string($conn,$_POST['product_category']);
+$product_name = mysqli_real_escape_string($conn,$_POST['product_name']);
+$product_price = mysqli_real_escape_string($conn,$_POST['product_price']);
 
-	if (empty($author) || empty($activity) || empty($adate) || empty($venue)) {
-		header("Location:../add_activities.php?error=empty");
-		exit();
-		exit();
-	}
-
-	//Insert Data
-
-	$sql = "INSERT INTO activities (author,activity,adate,atime,venue) VALUES('$author','$activity','$adate','$atime','$venue');";
-	$result = mysqli_query($conn,$sql);
-
-
-	if ($result) {
-		header("Location:../add_activities.php?error=successful");
-		exit();
-		exit();
-	}
-	else
-	{
-		header("Location:../add_activities.php?error=unsuccessful");
-		exit();
-	}
+if (empty($product_category) || empty($product_name) || empty($product_price)) {
+header("Location:../add_item.php?error=Empty");
+exit();
 }
+else
+{
+$sql = "INSERT INTO products(brand_id,product_name,product_price) VALUES('$product_category','$product_name','$product_price')";
+$result = mysqli_query($conn,$sql);
 
-//Add Scheme
-
-if (isset($_POST['add_scheme'])) {
-
-	$scheme_name = mysqli_real_escape_string($conn,$_POST['scheme_name']);
-	$sup_id = mysqli_real_escape_string($conn,$_POST['sup_id']);
-	$sup_start_date = date("Y-m-d");
-
-	if (empty($scheme_name) || empty($sup_id) || empty($sup_start_date)) {
-		header("Location:../add_schemes.php?error=empty");
-		exit();
-	}
-	elseif (condition) {
-		$sql = "SELECT * FROM scheme WHERE scheme_name = '$scheme_name'";
-		$result = mysqli_query($conn,$sql);
-		$rowcount = mysqli_num_rows($result);
-
-		if ($rowcount > 0) {
-		header("Location:../add_schemes.php?error=exists");
-		exit();
-		}
-
-	else
-	{
-		$sql = "INSERT INTO scheme (scheme_name,sup_id,sup_start_date) VALUES ('$scheme_name','$sup_id','$sup_start_date')";
-		$result = mysqli_query($conn,$sql);
-
-
-		if ($result) {
-	    header("Location:../view_scheme.php?error=successful");
-		exit();
-		}
-		else
-		{
-			header("Location:../add_schemes.php?error=fatal");
-		exit();
-		}
-	}
+if ($result)
+ {
+	header("Location:../add_item.php?error=Successful");
+	exit();
+}
+else
+{
+	echo "string".$conn->error;
+}
 }
 }
 
-//submit_record
-if (isset($_POST['submit_record'])) {
-	 $acc_email = mysqli_real_escape_string($conn,$_POST['acc_email']);
-	 $year = mysqli_real_escape_string($conn,$_POST['year']);
-	 $purchase = mysqli_real_escape_string($conn,$_POST['purchase']);
-	 $sale = mysqli_real_escape_string($conn,$_POST['sale']);
-	 $profit =($sale - $purchase);
+
+//Change Password
+if (isset($_POST['submit_reset'])) {
+
+$email = mysqli_real_escape_string($conn,$_POST['email']);
+
+$sql = "SELECT * FROM register_db WHERE email='$email'";
+$result = mysqli_query($conn,$sql);
+$count = mysqli_num_rows($result);
+$data = mysqli_fetch_array($result);
+$emailData =$data['email'];
+$user_id = $data['user_id'];
+
+$url = 'http://'.$_SERVER['SERVER_NAME'].'/ARPSMS/password_reset.php?user_id='.$user_id.'&email='.$emailData;
+$output = 'Hi. Please click this link to change your password.<br>'.$url;
+
+if ($email == $emailData) {
 
 
+							require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+			require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+			$mail = new PHPMailer;
+			$mail->setFrom('admin@example.com');
+			$mail->addAddress($email);
+			$mail->Subject = 'Password Reset';
+			$mail->Body = $output;
+			$mail->IsSMTP('true');
+			$mail->SMTPSecure = 'ssl';
+			$mail->Host = 'ssl://smtp.gmail.com';
+			$mail->SMTPAuth = true;
+			$mail->Port = 465;
 
-	 if (empty($year) || empty($purchase) || empty($sale) || empty($acc_email)) {
-	 	 header("Location:../history.php?error=Empty");
-	 	exit();
-	 }
-	 else
-	 {
-	 	$sql = "INSERT INTO account (year,purchase,sale,profit,acc_email) VALUES ('$year','$purchase','$sale','$profit','$acc_email');";
-	 	$result = mysqli_query($conn,$sql);
+			//Set your existing gmail address as user name
+			$mail->Username = 'martinallen722@gmail.com';
 
-	 	if ($result) {
-	    header("Location:../history.php?error=Successful");
-	 	exit();
-	 	}
-	 	else
-	 	{
-	 		header("Location:../update_record.php?error=Unsuccessful");
-	 	exit();
-	 	}
-	 }
+			//Set the password of your gmail address here
+			$mail->Password = 'allenmartin10224';
+			if(!$mail->send()) {
+				echo 'Email is not sent.';
+				echo 'Email error: ' . $mail->ErrorInfo;
+			} else {
+				 header("Location:../reset-password.php?error=sent");
+			exit();
+			}
+}
+else
+{
+header("Location:../reset-password.php?fatalerror");
+exit();
+}
+}
+
+//Forgot Password -Send mail
+if (isset($_POST['submit_forgot'])) {
+
+$email = mysqli_real_escape_string($conn,$_POST['email']);
+
+$sql = "SELECT * FROM register_db WHERE email='$email'";
+$result = mysqli_query($conn,$sql);
+$count = mysqli_num_rows($result);
+$data = mysqli_fetch_array($result);
+$emailData =$data['email'];
+$user_id = $data['user_id'];
+
+$url = 'http://'.$_SERVER['SERVER_NAME'].'/ARPSMS/forgot_password.php?user_id='.$user_id.'&email='.$emailData;
+$output = 'Hi. Please click this link to reset your password.<br>'.$url;
+
+if ($email == $emailData) {
 
 
+							require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+			require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+			$mail = new PHPMailer;
+			$mail->setFrom('admin@example.com');
+			$mail->addAddress($email);
+			$mail->Subject = 'Password Recovery';
+			$mail->Body = $output;
+			$mail->IsSMTP('true');
+			$mail->SMTPSecure = 'ssl';
+			$mail->Host = 'ssl://smtp.gmail.com';
+			$mail->SMTPAuth = true;
+			$mail->Port = 465;
+
+			//Set your existing gmail address as user name
+			$mail->Username = 'martinallen722@gmail.com';
+
+			//Set the password of your gmail address here
+			$mail->Password = 'allenmartin10224';
+			if(!$mail->send()) {
+				echo 'Email is not sent.';
+				echo 'Email error: ' . $mail->ErrorInfo;
+			} else {
+				 header("Location:../reset-password.php?error=sent");
+			exit();
+			}
+}
+else
+{
+header("Location:../reset-password.php?fatalerror");
+exit();
+}
 }
 
 

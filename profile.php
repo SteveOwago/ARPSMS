@@ -77,7 +77,7 @@ require 'includes/display.php';
             while ($user = mysqli_fetch_object($result)) {
             ?>
             <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-weight: bold;"><?php echo $user->first_name; ?>   <?php echo $user->last_name;  ?></span>
-            <?
+            <?php
             }
 
           }
@@ -85,12 +85,9 @@ require 'includes/display.php';
             ?>
 
              <?php
-
-
-          $image = "SELECT file FROM register_db WHERE  email='".$_SESSION['email']."' ";
-          $result = mysqli_query($conn,$image);
-          $path=mysqli_fetch_assoc($result) or die("Could not fetch array : " .mysqli_error($conn));
-
+                  $image = "SELECT file FROM register_db WHERE  email='".$_SESSION['email']."' ";
+                  $result = mysqli_query($conn,$image);
+                  $path=mysqli_fetch_assoc($result) or die("Could not fetch array : " .mysqli_error($conn));
             ?>
                 <img class="img-profile rounded-circle" src="<?php echo 'includes/image/'.$path['file'];?>">
               </a>
@@ -104,9 +101,9 @@ require 'includes/display.php';
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="password_recovery.php">
+                <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Change Password
+                  Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -251,7 +248,7 @@ require 'includes/display.php';
                   <div class="card bg-success text-white shadow">
                     <div class="card-body">
                       Farm Name
-                      <div class="text-white-50 small"><?php echo $scheme_name;?></div>
+                      <div class="text-white-50 small"><?php echo $farm_name;?></div>
                     </div>
                   </div>
                 </div>
@@ -313,13 +310,10 @@ require 'includes/display.php';
                 <!-- Card Body -->
                 <div class="card-body">
                  <?php
-
-
-          $image = "SELECT file FROM register_db WHERE  email='".$_SESSION['email']."' ";
-          $result = mysqli_query($conn,$image);
-          $path=mysqli_fetch_assoc($result) or die("Could not fetch array : " .mysqli_error($conn));
-
-            ?>
+                      $image = "SELECT file FROM register_db WHERE  email='".$_SESSION['email']."' ";
+                      $result = mysqli_query($conn,$image);
+                      $path=mysqli_fetch_assoc($result) or die("Could not fetch array : " .mysqli_error($conn));
+                  ?>
                 <img class="img-profile thumbnail" style="width: 100%;" src="<?php echo 'includes/image/'.$path['file'];?>">
               </a>
                 </div>
@@ -376,6 +370,4 @@ require 'includes/display.php';
 
   <?php
 include ('includes/script.php');
-
-
   ?>
