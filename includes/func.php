@@ -242,6 +242,8 @@ $phone = mysqli_real_escape_string($conn, $phone);
 $address = trim($_POST['address']);
 $address = mysqli_real_escape_string($conn, $address);
 
+$phone2 = trim($_POST['phone2']);
+
 $scheme_id = trim($_POST['scheme_id']);
 $scheme_id = mysqli_real_escape_string($conn, $scheme_id);
 
@@ -255,27 +257,28 @@ $user_id = trim($_POST['user_id']);
 $user_id = mysqli_real_escape_string($conn, $user_id);
 
 
-if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empty($user_id) )
+if (empty($phone) || empty($phone2) || empty($scheme_id) || empty($fno) || empty($fsize) || empty($user_id))
 
 	 	{
 		 header("Location:../register_farm.php?error=EmptyFields");
 		 exit();
+
 
 		}else
 					{
 						$sql = "SELECT * FROM register_db R, farms F WHERE R.user_id = F.user_id AND email = '$email'";
 						$result = mysqli_query($conn,$sql);
 						$check = mysqli_num_rows($result);
-
 						if ($check > 0) {
 															 echo "<script type='text/javascript' class='alert alert-success'>alert('Unsuccessful! Farm already exist,please try again!')</script>";
 																		echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
-														}else	{
-																		$sql = "INSERT INTO farms (phone,address,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$address','$scheme_id','$fno','$fsize','$user_id');";
-																		$result1 = mysqli_query($conn,$sql);
+														}else
+																	{
+																		$sql = "INSERT INTO farms (phone,phone2,scheme_id,fnumber,farm_size,user_id) VALUES('$phone','$phone2','$scheme_id','$fno','$fsize','$user_id');";
+																		$result = mysqli_query($conn,$sql);
+																	}
 
 																		if ($result1 == TRUE) {
-
 																						echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
 																						echo '<meta http-equiv="refresh" content="0; url=../farmer_page.php">';
 																		}
@@ -285,8 +288,6 @@ if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empt
 																		}
 																	}
 					}
-}
-
 ?>
 
 // Suspend Farmers
@@ -299,6 +300,8 @@ if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empt
 				header("Location:../my_farmers.php?error=Successful");
 			}else {
 			header("Location:../my_farmers.php");
+						echo "<script type='text/javascript' class='alert alert-success'>alert('Submitted successfully! Thanks for registering with us!')</script>";
+						echo '<meta http-equiv="refresh" content="0; url=../map.php">';
 		}
 
 	}else {
@@ -867,37 +870,5 @@ header("Location:../reset-password.php?fatalerror");
 exit();
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
