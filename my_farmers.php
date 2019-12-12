@@ -40,129 +40,118 @@ include('includes/db1.php');
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-crop"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">ARPSMS</div>
-      </a>
+         <!-- Sidebar - Brand -->
+         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="supervisor_page.php">
+           <div class="sidebar-brand-icon rotate-n-15">
+             <i class="fas fa-crop"></i>
+           </div>
+           <div class="sidebar-brand-text mx-3">ARPSMS</div>
+         </a>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
+         <!-- Divider -->
+         <hr class="sidebar-divider my-0">
 
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="supervisor_page.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
+         <!-- Nav Item - Dashboard -->
+         <li class="nav-item active">
+           <a class="nav-link" href="supervisor_page.php">
+             <i class="fas fa-fw fa-tachometer-alt"></i>
+             <span>Dashboard</span></a>
+         </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
+         <!-- Divider -->
+         <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
-      </div>
+         <!-- Heading -->
+         <div class="sidebar-heading">
+           Interface
+         </div>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Users Management</span>
-        </a>
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">User Management:</h6>
-            <a class="collapse-item" href="my_farmers.php">My Farmers</a>
-            <a class="collapse-item" href="suspended_farmers.php">Suspend Farmers</a>
-            <a class="collapse-item" href="delete_farmers.php">Delete Farmers</a>
-          </div>
-        </div>
-      </li>
+         <!-- Nav Item - Charts -->
+         <li class="nav-item">
+           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>User Management</span>
+           </a>
+           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+               <h6 class="collapse-header">User Management:</h6>
+               <a class="collapse-item" href="my_farmers.php">My Farmers</a>
+               <a class="collapse-item" href="suspended_farmers.php">Suspend Farmers</a>
+               <a class="collapse-item" href="delete_farmers.php">Delete Farmers</a>
+             </div>
+           </div>
+         </li>
 
-      <!-- Nav Item - Tables -->
+         <!-- Nav Item - Tables -->
+
+         <!-- Nav Item - Pages Collapse Menu -->
+         <li class="nav-item">
+           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>Notifications</span>
+           </a>
+           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+               <h6 class="collapse-header">Notifications:</h6>
+               <a class="collapse-item" href="#">Add Notifications</a>
+               <a class="collapse-item" href="farm.php">Delete Notifications</a>
+             </div>
+           </div>
+         </li>
+
+         <!-- Nav Item - Utilities Collapse Menu -->
+         <li class="nav-item">
+           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+             <i class="fas fa-fw fa-wrench"></i>
+             <span>My Orders</span>
+           </a>
+           <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+               <h6 class="collapse-header">View Orders:</h6>
+               <a class="collapse-item" href="orders_supervisor.php">All Orders</a>
+               <a class="collapse-item" href="supervisor_delivered.php">Delivered Orders</a>
+               <!-- <a class="collapse-item" href="utilities-other.">Scarer</a> -->
+             </div>
+           </div>
+         </li>
+
+         <!-- Divider -->
+         <hr class="sidebar-divider">
+
+         <!-- Heading -->
+         <div class="sidebar-heading">
+           Addons
+         </div>
+
+         <!-- Nav Item - Pages Collapse Menu -->
+         <li class="nav-item">
+           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+             <i class="fas fa-fw fa-folder"></i>
+             <span>Messages</span>
+           </a>
+           <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+               <h6 class="collapse-header">Items:</h6>
+               <a class="collapse-item" href="add_items.php">Add Items</a>
+               <a class="collapse-item" href="delete_items.php">Delete Items</a>
+
+             </div>
+           </div>
+         </li>
 
 
-      <!-- Nav Item - Tables -->
+         <!-- Divider -->
+         <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Notifications</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Notifications:</h6>
-            <a class="collapse-item" href="#">Add Notifications</a>
-            <a class="collapse-item" href="farm.php">Delete Notifications</a>
-          </div>
-        </div>
-      </li>
+         <!-- Sidebar Toggler (Sidebar) -->
+         <div class="text-center d-none d-md-inline">
+           <button class="rounded-circle border-0" id="sidebarToggle"></button>
+         </div>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>My Orders</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">View Orders:</h6>
-            <a class="collapse-item" href="orders_supervisor.php">All Orders</a>
-            <a class="collapse-item" href="supervisor_delivered.php">Delivered Orders</a>
-            <!-- <a class="collapse-item" href="scarers.php">Bird Scarers</a> -->
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Messages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Items:</h6>
-            <a class="collapse-item" href="view_messages.php">View Messages</a>
-            <!-- <a class="collapse-item" href="delete_items.php">Delete Items</a> -->
-
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-      </ul>
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
-    <!-- End of Sidebar -->
+       </ul>
+       <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -320,23 +309,23 @@ include('includes/db1.php');
                        $data_sup = mysqli_fetch_array($result_sup);
                        $supervisor_id = $data_sup['sup_id'];
                        if ($supervisor_id == $user_id) {
-                         $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.user_id AND S.sup_id = F.supa_id AND R.role = 3 AND S.sup_id = '".$_SESSION['user_id']."' ";
+                         $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.user_id AND S.sup_id = F.supa_id AND S.sup_id = '".$_SESSION['user_id']."' AND R.role= '3' ";
                          $resultfarmers = mysqli_query($conn,$sqlfarmers);
                          while(($data_farmers = mysqli_fetch_array($resultfarmers))>0) {
-                           foreach ($resultfarmers as $farmer => $data_farmer) {?>
+                           ?>
                              <tr>
-                               <td> <?php echo $data_farmer['first_name']; ?>&nbsp;<?php echo $data_farmer['last_name']; ?></td>
-                               <td> <?php echo $data_farmer['email']; ?></td>
-                                 <td> <?php echo $data_farmer['phone']; ?></td>
+                               <td> <?php echo $data_farmers['first_name']; ?>&nbsp;<?php echo $data_farmers['last_name']; ?></td>
+                               <td> <?php echo $data_farmers['email']; ?></td>
+                                 <td> <?php echo $data_farmers['phone']; ?></td>
 
-                                <td class="text-center" ><a href="#" data-id="<?php echo $farmer_id = $data_farmer['user_id']; ?>" data-toggle="modal" data-target="#viewModal<?php echo $data_farmer['user_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
-                                 <a href="#" data-toggle="modal" data-target="#suspendModal<?php echo $data_farmer['user_id']; ?>"><button type="button"  class="btn btn-warning btn-sm" >Suspend</button></a>
+                                <td class="text-center" ><a href="#" data-id="<?php echo $farmer_id = $data_farmers['user_id']; ?>" data-toggle="modal" data-target="#viewModal<?php echo $data_farmers['user_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
+                                 <a href="#" data-toggle="modal" data-target="#suspendModal<?php echo $data_farmers['user_id']; ?>"><button type="button"  class="btn btn-warning btn-sm" >Suspend</button></a>
                                  </td>
 
                              </tr>
 
                              <!-- Suspend Modal-->
-                           <div class="modal" id="suspendModal<?php echo $data_farmer['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal" id="suspendModal<?php echo $data_farmers['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                              <div class="modal-dialog" role="document">
                                <form action="includes/func.php" method="GET">
                                  <div class="modal-content">
@@ -348,15 +337,15 @@ include('includes/db1.php');
                                    </div>
                                    <div class="modal-body">
                                      <p><ul>
-                                         <li><strong>Farm Number:</strong>&nbsp;<?php echo $data_farmer['fnumber']; ?></li>
-                                         <li><strong>Email Address:</strong>&nbsp;<?php echo $data_farmer['email']; ?></li>
-                                         <li><strong>Phone Number:</strong>&nbsp;<?php echo $data_farmer['phone']; ?></li>
+                                         <li><strong>Farm Number:</strong>&nbsp;<?php echo $data_farmers['fnumber']; ?></li>
+                                         <li><strong>Email Address:</strong>&nbsp;<?php echo $data_farmers['email']; ?></li>
+                                         <li><strong>Phone Number:</strong>&nbsp;<?php echo $data_farmers['phone']; ?></li>
 
                                        </ul>
                                      </p>
                                    </div>
                                    <div class="modal-footer">
-                                     <a href="includes/func.php?id_farmer= <?php echo $data_farmer['user_id']; ?>">
+                                     <a href="includes/func.php?id_farmer= <?php echo $data_farmers['user_id']; ?>">
                                      <button  type="button"name="suspend" value="suspend" class="btn btn-warning">Suspend</button>
                                      </a>
                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -368,7 +357,7 @@ include('includes/db1.php');
 
 
                            <!-- View Modal-->
-                         <div class="modal" id="viewModal<?php echo $data_farmer['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal" id="viewModal<?php echo $data_farmers['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                            <div class="modal-dialog" role="document">
                              <form action="includes/func.php" method="POST">
                                <div class="modal-content">
@@ -380,9 +369,9 @@ include('includes/db1.php');
                                  </div>
                                  <div class="modal-body">
                                    <p><ul>
-                                       <li><strong>Farm Number:</strong>&nbsp;<?php echo $data_farmer['fnumber']; ?></li>
-                                       <li><strong>Email Address:</strong>&nbsp;<?php echo $data_farmer['email']; ?></li>
-                                       <li><strong>Phone Number:</strong>&nbsp;<?php echo $data_farmer['phone']; ?></li>
+                                       <li><strong>Farm Number:</strong>&nbsp;<?php echo $data_farmers['fnumber']; ?></li>
+                                       <li><strong>Email Address:</strong>&nbsp;<?php echo $data_farmers['email']; ?></li>
+                                       <li><strong>Phone Number:</strong>&nbsp;<?php echo $data_farmers['phone']; ?></li>
 
                                      </ul>
                                    </p>
@@ -399,7 +388,6 @@ include('includes/db1.php');
                            <?php
                                       }
                                     }
-                            }
 
                                   ?>
 

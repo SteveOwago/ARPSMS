@@ -296,7 +296,7 @@ if (empty($address) || empty($scheme_id) || empty($fno) || empty($fsize) || empt
 		$sqlsuspendfarmer = "UPDATE register_db SET isSuspended = 1 WHERE user_id = $idfarmer";
 		$resultsuspendfarmer = mysqli_query($conn,$sqlsuspendfarmer);
 		if ($resultsuspendfarmer) {
-				header("Location:../my_farmers.php");
+				header("Location:../my_farmers.php?error=Successful");
 			}else {
 			header("Location:../my_farmers.php");
 		}

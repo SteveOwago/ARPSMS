@@ -312,9 +312,9 @@
                       <td> <?php echo $data['fnumber']; ?></td>
                       <td> <?php echo $data['reg_date']; ?></td>
 
-                       <td class="text-center" ><a href="edit_farmers.php?efarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
-                         <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
-                        <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                       <td class="text-center" >
+                        <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
+                        <a href="update_farmerssup.php?dfarmers=<?php echo $data['user_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
 
                     </tr>
                     <?php

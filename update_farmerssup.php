@@ -28,6 +28,25 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style>
+  .content-table thead tr{
+   background-color: #009879;
+   color: #ffffff;
+   text-align: left;
+   font-weight: bold;
+  }
+  .content-table th,.content-table td{
+    padding: 12px 15px;
+  }
+  .content-table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+  }
+  .content-table{
+    border-collapse: collapse;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+  </style>
 
 </head>
 
@@ -150,8 +169,7 @@
 
        </ul>
        <!-- End of Sidebar -->
-
-
+       
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -233,7 +251,7 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profile_supervisor.php?pf=<?php echo $_SESSION['email'] ;?>">
+                <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
@@ -265,98 +283,67 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">My Suspended Farmers</h6>
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
 
             <div class="card-body">
-              <!-- <?php
+              <?php
               if(isset($_GET['error']))
               {
               if($_GET['error'] =="Successful"){
-              echo '<div class="alert alert-success" role="alert">Suspention Retrieved Successfully!</div>';
+              echo '<div class="alert alert-success" role="alert">Supervisor Deleted Successfully!</div>';
               }
               elseif ($_GET['error'] == "error") {
               echo '<div class="alert alert-danger" role="alert">An Error Occured! Please Try Again!</div>';
               }
               }
-              ?> -->
+              ?>
+              <div class="table-responsive">
+                 <table class="table table-bordered content-table" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Username</th>
+                      <th>Email Address</th>
+                      <th>Scheme</th>
+                      <th>Farm Number</th>
+                      <th>Date of Registration</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Username</th>
+                      <th>Email Address</th>
+                      <th>Scheme</th>
+                      <th>Farm Number</th>
+                      <th>Date of Registration</th>
 
-              <?php
-                    include ('includes/fetch.php');
-                    $user_id = $_SESSION['user_id'];
-                    $data_sup = mysqli_fetch_array($resultsupervisor);
-                    $sup_id = $data_sup['sup_id'];
-                    if ($sup_id == $user_id) {
-                     ?>
-                  <div class="table-responsive">
-                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                       <thead class="bg-success">
-                         <tr class="text-bold text-white">
-                           <th><span class="fa fa-users"></span>&nbsp;Farmers</th>
-                           <th><span class="fa fa-coins"></span>&nbsp;Email</th>
-                           <th><span class="fa fa-tools"></span>&nbsp;Actions</th>
-                         </tr>
-                       </thead>
-                      <tfoot>
-                        <tr>
-                          <th>Farmers</th>
-                          <th>Email Address</th>
-                          <th class="text-center">Action</th>
-                        </tr>
-                      </tfoot>
-                      <tbody>
-                       <?php
-                       while($data = mysqli_fetch_array($suspendedfarmers)) {  ?>
-                        <tr>
-                          <td> <?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></td>
-                          <td> <?php echo $data['email']; ?></td>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                   <?php
+                  include_once ('includes/fetch.php');
+                   while($data = mysqli_fetch_array($resultfarmers)) {  ?>
+                    <tr>
+                      <td> <?php echo $data['username']; ?></td>
+                      <td> <?php echo $data['email']; ?></td>
+                      <td><?php echo $data['farm_name']; ?></td>
+                      <td> <?php echo $data['fnumber']; ?></td>
+                      <td> <?php echo $data['reg_date']; ?></td>
 
-                           <td class="text-center" ><a href="#" data-toggle="modal" data-target="#RetrieveSusModal<?php echo $data['user_id']; ?>"><button type="button" class="btn btn-info btn-sm btn-block
-                             "><i class="fas fa-level-up-alt"></i>&nbsp;Retrieve Suspension</button></a>
-                             </td>
+                       <td class="text-center" ><a href="edit_farmers.php?efarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
+                         <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
+                        <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
 
-                        </tr>
-                        <!-- RetreaveSuspention Modal-->
-                      <div class="modal" id="RetrieveSusModal<?php echo $data['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <form action="includes/func.php" method="GET">
-                            <div class="modal-content">
-                              <div class="modal-header bg-info">
-                                <h5 class="modal-title">Retrieve Suspension for this Farmer?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <p>
-                                  <ul>
-                                    <li><strong>Farmer Names:</strong>&nbsp;<?php echo $data['first_name']; ?>&nbsp;<?php echo $data['last_name']; ?></li>
-                                    <li><strong>Email Address:</strong>&nbsp;<?php echo $data['email']; ?></li>
-                                  </ul>
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <a href="includes/func.php?id_farmer1= <?php echo $data['user_id']; ?>">
-                                <button  type="button"name="RetrieveSus" value="RetrieveSus" class="btn btn-info">Save Changes</button>
-                                </a>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                        <?php
-                                       }
+                    </tr>
+                    <?php
+                                   }
 
-                                ?>
-                      </tbody>
-                    </table>
-                  </div>
-              <!-- <?php
-            }else {
-              echo "No Suspended Farmers in Your Scheme!";
-            }
-              ?> 
+                            ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 

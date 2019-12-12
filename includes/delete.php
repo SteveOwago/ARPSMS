@@ -25,6 +25,18 @@ else {
  	echo "".$conn->error;
  }
 
+ // Delete Farmer
+ if(isset($_GET['dfarmers'])) {
+ $dfarmers=$_GET['dfarmers'];
+ $sql="DELETE FROM register_db WHERE user_id ='$dfarmers'";
+ $sql=mysqli_query($conn,$sql);
+ header('location: ../delete_farmers.php?Successful');
+ exit();
+ }
+ else {
+  	echo "".$conn->error;
+  }
+
 //Delete Products
 
  // Delete Supervisors

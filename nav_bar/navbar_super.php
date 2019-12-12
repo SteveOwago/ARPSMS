@@ -94,7 +94,7 @@
          <div class="bg-white py-2 collapse-inner rounded">
            <h6 class="collapse-header">Items:</h6>
            <a class="collapse-item" href="add_items.php">Add Items</a>
-           <a class="collapse-item" href="delete_items.php">Delete Items</a>
+           <!-- <a class="collapse-item" href="delete_items.php">Delete Items</a> -->
 
          </div>
        </div>

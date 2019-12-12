@@ -1,6 +1,7 @@
 <?php
 include ('includes/header.php');
-include ('nav_bar/navbar_admin.php');
+include ('includes/ses2.php');
+include ('nav_bar/navbar_super.php');
 require 'includes/db.php';
 
 ?>
