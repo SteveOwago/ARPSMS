@@ -1,12 +1,12 @@
 
 <?php
  include_once ('includes/ses.php');
-  include_once ('includes/db1.php');
+include_once ('includes/db1.php');
 
 
 ?>
-<!DOCTYPE php>
-<php lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 
@@ -30,7 +30,7 @@
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <style>
   .content-table thead tr{
-   background-color: #009879;
+
    color: #ffffff;
    text-align: left;
    font-weight: bold;
@@ -93,8 +93,8 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Update Users:</h6>
-            <a class="collapse-item" href="update_supervisors.php">Supervisors</a>
-            <a class="collapse-item" href="update_farmers.php">Farmers</a>
+            <a class="collapse-item" href="cards.html">Supervisors</a>
+            <a class="collapse-item" href="farm.php">Farmers</a>
           </div>
         </div>
       </li>
@@ -110,8 +110,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Activities:</h6>
-            <a class="collapse-item" href="admin_view_activities.php">View Activities</a>
-            <a class="collapse-item" href="add_activities.php?addactivity=<?php echo $_SESSION['email'] ;?>">Add Activities</a>
+            <a class="collapse-item" href="cards.html">View Activities</a>
+            <a class="collapse-item" href="farm.php">Add Activities</a>
           </div>
         </div>
       </li>
@@ -124,10 +124,10 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">View Orders:</h6>
+            <h6 class="collapse-header">View Orders:</h6>
             <a class="collapse-item" href="view_farm_orders.php">All Orders</a>
-            <a class="collapse-item" href="view_delivered_orders.php">Delivered Orders</a>
-            <a class="collapse-item" href="view_notdelivered_orders.php">Yet to be Delivered</a>
+            <a class="collapse-item" href="utilities-border.html">Delivered Orders</a>
+            <a class="collapse-item" href="utilities-animation.html">Yet to be Delivered</a>
             <!-- <a class="collapse-item" href="utilities-other.html">Scarer</a> -->
           </div>
         </div>
@@ -149,10 +149,9 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-           <h6 class="collapse-header">Items:</h6>
+            <h6 class="collapse-header">Items:</h6>
             <a class="collapse-item" href="add_item.php">Add Items</a>
-            <a class="collapse-item" href="view_products.php">Update Items</a>
-
+            <a class="collapse-item" href="delete_items.php">Delete Items</a>
           </div>
         </div>
       </li>
@@ -167,7 +166,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Schemes:</h6>
             <a class="collapse-item" href="add_schemes.php">Add Schemes</a>
-            <a class="collapse-item" href="view_scheme.php">Update Schemes</a>
+            <a class="collapse-item" href="update_scheme.php">Update Schemes</a>
+            <a class="collapse-item" href="view_scheme.php">View Schemes</a>
           </div>
         </div>
       </li>
@@ -299,54 +299,70 @@
             </div>
 
             <div class="card-body">
+
+              <!-- Display Error Message -->
               <?php
-              if(isset($_GET['error']))
-              {
-              if($_GET['error'] =="Successful"){
-              echo '<div class="alert alert-success" role="alert">Supervisor Deleted Successfully!</div>';
-              }
-              elseif ($_GET['error'] == "error") {
-              echo '<div class="alert alert-danger" role="alert">An Error Occured! Please Try Again!</div>';
-              }
-              }
+               if(isset($_GET['error']))
+               {
+               if($_GET['error'] =="Successful"){
+               echo '<div class="alert alert-success" role="alert">Supervisor Deleted Successfully!</div>';
+               }
+               elseif ($_GET['error'] == "error") {
+               echo '<div class="alert alert-danger" role="alert">An Error Occured! Please Try Again!</div>';
+               }
+               }
               ?>
               <div class="table-responsive">
-                 <table class="table table-bordered content-table" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+                 <table class="table table-bordered content-table " id="dataTable" width="100%" cellspacing="0">
+                  <thead class="bg-success">
                     <tr>
-                      <th>Username</th>
                       <th>Email Address</th>
-                      <th>Scheme</th>
-                      <th>Farm Number</th>
-                      <th>Date of Registration</th>
+                      <th>Order Name</th>
+                      <th>Quantity</th>
+
+                      <th>Expected Delivery</th>
+                        <th>Status</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Username</th>
                       <th>Email Address</th>
-                      <th>Scheme</th>
-                      <th>Farm Number</th>
-                      <th>Date of Registration</th>
-
+                      <th>Order Name</th>
+                      <th>Quantity</th>
+                      <th>Expected Delivery</th>
+                        <th>Status</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </tfoot>
                   <tbody>
                    <?php
                   include_once ('includes/fetch.php');
-                   while($data = mysqli_fetch_array($resultfarmers)) {  ?>
+                   while($data = mysqli_fetch_array($resultorders)) {  ?>
                     <tr>
-                      <td> <?php echo $data['username']; ?></td>
-                      <td> <?php echo $data['email']; ?></td>
-                      <td><?php echo $data['scheme_name']; ?></td>
-                      <td> <?php echo $data['fnumber']; ?></td>
-                      <td> <?php echo $data['reg_date']; ?></td>
 
-                       <td class="text-center" >
-                         <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm"><i class = "fa fa-eye"></i></button></a>
-                        <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm"><i class = "fa fa-trash"></i></button></a>
+                      <td> <?php echo $data['email']; ?></td>
+                      <td><?php echo $data['product_name']; ?></td>
+                      <td> <?php echo $data['product_quantity']; ?></td>
+                      <td> <?php echo $data['expected_delivery']; ?></td>
+                      <td> <?php
+
+                      $sql = "SELECT status FROM orders";
+                      $result = mysqli_query($conn,$sql);
+                      $count = mysqli_num_rows($result);
+                      $data = mysqli_fetch_array($result);
+                      if ($data['status'] == 0) {
+                         echo "Not Delivered";
+                      }
+                      elseif($data['status'] == 1) {
+                        echo "Delivered";
+                      }
+
+                       ?></td>
+
+                       <td class="text-center">
+                         <a href="view_supervisor.php?vsuper=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm"><i class = "fa fa-eye"></i></button></a>
+                        <a href="includes/delete.php?dsuper=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-danger btn-sm"><i class = "fa fa-trash"></i></button></a></td>
 
                     </tr>
                     <?php
@@ -425,4 +441,4 @@
 
 </body>
 
-</php>
+</html>
