@@ -6,7 +6,6 @@ require 'includes/db1.php';
 	// Fetch orders details
  $sqlinfo = "SELECT * FROM orders O JOIN products P , register_db R WHERE R.user_id = O.user_id AND O.product_id=P.product_id";
  $result = mysqli_query($conn, $sqlinfo);
-=======
 	// // Fetch farm details
  // $sqlinfo = "SELECT * FROM orders JOIN products ON orders.order_id = products.product_id";
  // $result = mysqli_query($conn, $sqlinfo);
@@ -24,7 +23,7 @@ require 'includes/db1.php';
  $resultsupervisor = mysqli_query($conn,$sqlsupervisor);
 
  // Fetch Farmers
- $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.user_id AND S.sup_id = F.supa_id AND R.role = 3";
+ $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.farm_id AND F.scheme_id = S.scheme_id";
  $resultfarmers = mysqli_query($conn,$sqlfarmers);
 
 // Fetch suspended farmers

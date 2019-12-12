@@ -1,8 +1,11 @@
+
+
 <?php
-require 'includes/ses3.php';
+require ('includes/ses3.php');
 include ('includes/header.php');
 include ('nav_bar/navbar.php');
 require 'includes/db1.php';
+// require 'includes/display.php';
 
 
 ?>
@@ -59,57 +62,6 @@ require 'includes/db1.php';
             <!-- Nav Item - Alerts -->
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications
-                <?php
-                include_once ('includes/functions.php');
-                $query = "SELECT * FROM `notifications` where `status` = 'unread' order by `date` DESC";
-                if(count(fetchAll($query))>0){
-                ?>
-                <span class="badge badge-light " ><?php echo count(fetchAll($query)); ?></span>
-              <?php
-                }
-                    ?>
-              </a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <?php
-                $query = "SELECT * from `notifications` order by `date` DESC";
-                 if(count(fetchAll($query))>0){
-                     foreach(fetchAll($query) as $i){
-                ?>
-              <a style ="
-                         <?php
-                            if($i['status']=='unread'){
-                                echo "font-weight:bold;";
-                            }
-                         ?>
-                         " class="dropdown-item" href="view_comment.php?id=<?php echo $i['id'] ?>">
-                <small><i><?php echo date('F j, Y, g:i a',strtotime($i['date'])) ?></i></small><br/>
-                  <?php
-
-                if($i['type']=='comment'){
-                    echo "Someone commented <br>on your post.";
-                }else if($i['type']=='like'){
-                    echo ucfirst($i['name'])." <br>liked your post.";
-                }
-
-                  ?>
-                </a>
-              <div class="dropdown-divider"></div>
-                <?php
-                     }
-                 }else{
-                     echo "No Records yet.";
-                 }
-                     ?>
-            </div>
-          </li>
-        </ul>
-
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -126,8 +78,7 @@ require 'includes/db1.php';
             }
 
           }
-
-            ?>
+          ?>
 
              <?php
 
@@ -149,9 +100,9 @@ require 'includes/db1.php';
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="#">
+                 <a class="dropdown-item" href="reset-password.php">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
+                  Change Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -172,7 +123,7 @@ require 'includes/db1.php';
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <a target="_blank" href="pdf/print.php?print=<?php echo $_SESSION['email'] ;?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
 
@@ -186,8 +137,22 @@ require 'includes/db1.php';
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">My Farm</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
+
+                    if (isset($_SESSION['email'])) {
+                    $sql = "SELECT * FROM farms F, register_db R WHERE F.user_id = R.user_id AND email='".$_SESSION['email']."'";
+                    $result = mysqli_query($conn,$sql);
+                    $count = mysqli_num_rows($result);
+                    $data = mysqli_fetch_array($result);
+
+                    $fnumber = $data['fnumber'];
+                    echo $fnumber;
+
+                  }
+
+
+                      ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
