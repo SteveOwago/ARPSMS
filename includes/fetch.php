@@ -23,7 +23,7 @@ require 'includes/db1.php';
  $resultsupervisor = mysqli_query($conn,$sqlsupervisor);
 
  // Fetch Farmers
- $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.user_id AND S.sup_id = F.supa_id AND R.role = 3";
+ $sqlfarmers = "SELECT * FROM register_db R,farms F,scheme S WHERE R.user_id = F.farm_id AND F.scheme_id = S.scheme_id";
  $resultfarmers = mysqli_query($conn,$sqlfarmers);
 
 // Fetch suspended farmers

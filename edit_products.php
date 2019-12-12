@@ -16,7 +16,7 @@ require 'includes/display.php';
        <div class="container-fluid"><br><br>
 
          <!-- Page Heading -->
-         <h1 class="h3 mb-1 text-gray-800">Confirm Supervisor</h1><br><br>
+         <h1 class="h3 mb-1 text-gray-800">Update Products</h1><br><br>
 
 
 <form action="includes/update.php" method="POST">
@@ -33,21 +33,16 @@ require 'includes/display.php';
            <div class="col-lg-5">
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                 <h6 class="m-0 font-weight-bold text-primary">Confirm Supervisor</h6>
+                 <h6 class="m-0 font-weight-bold text-primary">Update Products</h6>
                </div>
                <div class="card-body">
-              <label>Scheme Name</label>
-           <input class="card mb-4 py-3 border-bottom-success form-control" type="text" value="<?php echo $scheme_name;?>"><br>
-             <label>Supervisor Address</label>
-           <input class="card mb-4 py-3 border-bottom-success form-control" type="text" name= "email" value="<?php echo $email;?>"><br>
+              <label>Item Name</label>
+           <input class="card mb-4 py-3 border-bottom-success form-control" name="product_name" type="text" value="<?php echo $product_name;?>"><br>
+            <label>Item Price</label>
+           <input class="card mb-4 py-3 border-bottom-success form-control" name= "product_price" type="text" value="<?php echo $product_price;?>"><br>
 
-           <label>Action</label>
-           <select border-bottom-success placeholder="Select supervisor..." name="role">
-           <option value="2">Activate</option>
-           <option value="3">Deactivate</option>
-              </select><br><br>
 
-              <button class="btn btn-success btn-sm" name="activate_sup" type="update_scheme">Submit</button>
+              <button class="btn btn-success btn-sm" name="update_pro" type="update_product">Submit</button>
                </div>
              </div>
            </div>
