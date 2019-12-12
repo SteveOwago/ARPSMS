@@ -1,12 +1,11 @@
-
-
-
 <?php
 require 'includes/ses.php';
-require 'includes/db1.php';
 include ('includes/header.php');
 include ('nav_bar/navbar_admin.php');
-    ?>
+require 'includes/db1.php';
+
+
+?>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -150,9 +149,9 @@ include ('nav_bar/navbar_admin.php');
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="reset-password.php">
+                <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Change Password
+                  Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -265,7 +264,7 @@ include ('nav_bar/navbar_admin.php');
 
             <!-- Area Chart -->
             <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4"> -->
+              <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
@@ -293,7 +292,7 @@ include ('nav_bar/navbar_admin.php');
 
             <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4"> -->
+              <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
@@ -391,7 +390,7 @@ include ('nav_bar/navbar_admin.php');
                       <div class="text-white-50 small">#36b9cc</div>
                     </div>
                   </div>
-                </div> -->
+                </div>
                 <div class="col-lg-6 mb-4">
                   <div class="card bg-warning text-white shadow">
                     <div class="card-body">
@@ -408,7 +407,7 @@ include ('nav_bar/navbar_admin.php');
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4"> -->
+                <div class="col-lg-6 mb-4">
                   <div class="card bg-secondary text-white shadow">
                     <div class="card-body">
                       Secondary
@@ -420,10 +419,10 @@ include ('nav_bar/navbar_admin.php');
 
             </div>
 
-             <div class="col-lg-6 mb-4">
+            <div class="col-lg-6 mb-4">
 
               <!-- Illustrations -->
-               <div class="card shadow mb-4">
+              <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                 </div>
@@ -453,7 +452,7 @@ include ('nav_bar/navbar_admin.php');
         </div>
         <!-- /.container-fluid -->
 
-
+      </div>
       <!-- End of Main Content -->
 
 

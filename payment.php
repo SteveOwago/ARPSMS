@@ -10,7 +10,7 @@ if($_SESSION['email'])
 $result = mysqli_query($conn, "SELECT * FROM farms F, register_db R WHERE F.farm_id = R.user_id");
 while($row = mysqli_fetch_array($result)){
 $phone = $row['phone'];
-$phone2 = $row['phone2'];
+$address = $row['address'];
 
 
 }
@@ -141,10 +141,9 @@ $phone2 = $row['phone2'];
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-           <h1 class="h3 mb-1 text-gray-800"></h1><br><br>
-            <a href="pdf/order_report.php?order_report=<?php echo $_SESSION['email']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
 
@@ -169,7 +168,7 @@ $phone2 = $row['phone2'];
                         <option><?php if($status == 0) echo 'disabled';?>Cash on Delivery</option>
                       </select><br><br>
                       <label><i class="fa fa-home">  </i> Address</label>
-                      <input type="" name="" value="<?php echo $phone2;?>" class="form-control col-lg-12 col-lg-offset-8" ><br>
+                      <input type="" name="" value="<?php echo $address;?>" class="form-control col-lg-12 col-lg-offset-8" ><br>
                       <label><i class="fa fa-phone">  </i>  Phone Number</label>
                       <input type="" name="" value="<?php echo $phone;?>" class="form-control col-lg-12 col-lg-offset-8" ><br>
                       <label><i class="fa fa-credit-card">  </i> Card Number</label>

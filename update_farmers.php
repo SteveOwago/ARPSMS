@@ -52,6 +52,7 @@
 
 <body id="page-top">
 
+
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -110,8 +111,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Activities:</h6>
-            <a class="collapse-item" href="admin_view_activities.php">View Activities</a>
-            <a class="collapse-item" href="add_activities.php?addactivity=<?php echo $_SESSION['email'] ;?>">Add Activities</a>
+            <a class="collapse-item" href="activities.php">View Activities</a>
+            <a class="collapse-item" href="add_activities.php">Add Activities</a>
           </div>
         </div>
       </li>
@@ -124,11 +125,11 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">View Orders:</h6>
+            <h6 class="collapse-header">View Orders:</h6>
             <a class="collapse-item" href="view_farm_orders.php">All Orders</a>
-            <a class="collapse-item" href="view_delivered_orders.php">Delivered Orders</a>
-            <a class="collapse-item" href="view_notdelivered_orders.php">Yet to be Delivered</a>
-            <!-- <a class="collapse-item" href="utilities-other.html">Scarer</a> -->
+            <a class="collapse-item" href="utilities-border.php">Delivered Orders</a>
+            <a class="collapse-item" href="utilities-animation.php">Yet to be Delivered</a>
+            <!-- <a class="collapse-item" href="utilities-other.php">Scarer</a> -->
           </div>
         </div>
       </li>
@@ -149,10 +150,11 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-           <h6 class="collapse-header">Items:</h6>
-            <a class="collapse-item" href="add_item.php">Add Items</a>
-            <a class="collapse-item" href="view_products.php">Update Items</a>
-
+            <h6 class="collapse-header">View Orders:</h6>
+            <a class="collapse-item" href="add_items.php">Tractors</a>
+            <a class="collapse-item" href="add_items.php">Fertilizers</a>
+            <a class="collapse-item" href="add_items.php">Seeds</a>
+            <a class="collapse-item" href="add_items.php">Scarers</a>
           </div>
         </div>
       </li>
@@ -166,8 +168,8 @@
         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Schemes:</h6>
-            <a class="collapse-item" href="add_schemes.php">Add Schemes</a>
-            <a class="collapse-item" href="view_scheme.php">Update Schemes</a>
+            <a class="collapse-item" href="scheme.php">Add Schemes</a>
+            <a class="collapse-item" href="delete.php">Delete Schemes</a>
           </div>
         </div>
       </li>
@@ -340,13 +342,13 @@
                     <tr>
                       <td> <?php echo $data['username']; ?></td>
                       <td> <?php echo $data['email']; ?></td>
-                      <td><?php echo $data['scheme_name']; ?></td>
+                      <td><?php echo $data['farm_name']; ?></td>
                       <td> <?php echo $data['fnumber']; ?></td>
                       <td> <?php echo $data['reg_date']; ?></td>
 
-                       <td class="text-center" >
-                         <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm"><i class = "fa fa-eye"></i></button></a>
-                        <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm"><i class = "fa fa-trash"></i></button></a>
+                       <td class="text-center" ><a href="edit_farmers.php?efarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-info btn-sm">Edit</button></a>
+                         <a href="view_farmers.php?vfarmers=<?php echo $data['scheme_id']; ?>"><button type="button" class="btn btn-success btn-sm">View</button></a>
+                        <a href="includes/delete_farmer.php?dfarmers=<?php echo $data['farm_id']; ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
 
                     </tr>
                     <?php

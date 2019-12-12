@@ -20,50 +20,5 @@ if ($result) {
 }
 }
 
-//Activate Sup
-
-if (isset($_POST['activate_sup'])) {
-
-$role = trim($_POST['role']);
-$email = trim($_POST['email']);
-
-
-$sql = "UPDATE register_db SET role = '$role' WHERE email
-= '$email'";
-$result = mysqli_query($conn,$sql);
-
-
-if ($result) {
-  header("Location:../view_scheme.php?error=Successful");
-  exit();
-}
-}
-
-//Update
-
-if (isset($_POST['update_pro'])) {
-
-$product_name = trim($_POST['product_name']);
-$product_price = trim($_POST['product_price']);
-
-
-
-$sql = "UPDATE products SET product_price = '$product_price', product_name = '$product_name' WHERE product_name
-= '$product_name'";
-$result = mysqli_query($conn,$sql);
-
-
-if ($result) {
-  header("Location:../view_products.php?error=Successful");
-  exit();
-}
-
-else
-{
-	 header("Location:../view_products.php?error=error");
-  exit();
-}
-}
-
 
 ?>

@@ -38,23 +38,13 @@ else {
   }
 
 //Delete Products
+
+ // Delete Supervisors
 if(isset($_GET['dlproduct'])) {
 $dlproduct=$_GET['dlproduct'];
 $sql="DELETE FROM products WHERE product_id='$dlproduct'";
 $sql=mysqli_query($conn,$sql);
 header('location: ../view_products.php?error=Successful');
-exit();
-}
-else {
- 	echo "".$conn->error;
- }
-
-//Delete Orders
-if(isset($_GET['dorder'])) {
-$dorder=$_GET['dorder'];
-$sql="DELETE FROM orders WHERE order_id='$dorder'";
-$sql=mysqli_query($conn,$sql);
-header('location: ../view_farm_orders.php?error=Successful');
 exit();
 }
 else {
